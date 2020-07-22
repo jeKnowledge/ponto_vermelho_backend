@@ -1,25 +1,69 @@
 {%load static%}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beneficiario</title>
-</head>
-<body>
-    <div class="content-section">
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Join</legend>
-                <input type="checkbox" class="form-control" placeholder="Requisicao Interna" name="username" id="id_username"> <br>
-                <input type="checkbox" class="form-control" placeholder="Individual" name="instituicao" id="id_instituicao"> <br>
-                <input type="checkbox" class="form-control" placeholder="Agregado" name="publicoAlvo" id="id_publico"> <br>
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">seguinte</button>
-            </div>
-        </form>
-    </div>
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Beneficiario</title>
+		<script>
+			localStorage.clear();
+			const handleNext = () => {
+				console.log("asads");
+				const internCheckBox = document.getElementById("intern");
+				const individualCheckBox = document.getElementById(
+					"individual"
+				);
+				const agregadoCheckBox = document.getElementById("agregado");
+
+				if (internCheckBox.checked) {
+					window.location.replace("/Pedido");
+					localStorage.setItem("typeOrder", "Intern");
+				} else if (individualCheckBox.checked) {
+					window.location.replace("/Beneficiario");
+					localStorage.setItem("typeOrder", "Individual");
+				} else if (agregadoCheckBox.checked) {
+					window.location.replace("/Beneficiario");
+					localStorage.setItem("typeOrder", "Agregado");
+				}
+			};
+		</script>
+	</head>
+	<body>
+		<div class="content-section">
+			<form method="POST">
+				{% csrf_token %}
+				<fieldset class="form-group">
+					<legend class="border-bottom mb-4">Join</legend>
+					<input
+						type="checkbox"
+						class="form-control"
+						placeholder="Requisicao Interna"
+						name="intern"
+						id="intern"
+					/>Interno
+					<br />
+					<input
+						type="checkbox"
+						class="form-control"
+						placeholder="Individual"
+						name="individual"
+						id="individual"
+					/>Individual
+					<br />
+					<input
+						type="checkbox"
+						class="form-control"
+						placeholder="Agregado"
+						name="agregado"
+						id="agregado"
+					/>Agregado
+					<br />
+				</fieldset>
+				<div class="form-group"></div>
+			</form>
+			<button class="btn btn-outline-info" onclick="handleNext()">
+				seguinte
+			</button>
+		</div>
+	</body>
 </html>

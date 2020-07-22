@@ -1,0 +1,34 @@
+<script>
+	const handleSubmit = () => {
+		const product = document.getElementById("produto").value;
+		const quantidade = document.getElementById("quantidade").value;
+
+		document.getElementById("id_produto").value = product;
+		document.getElementById(
+			"id_cartaoCidadao"
+		).value = localStorage.getItem("cartaoCidadao");
+		document.getElementById("hidden_form").submit();
+	};
+</script>
+<form id="final_form">
+	<select name="cars" id="produto">
+		<option value="volvo">Volvo</option>
+		<option value="saab">Saab</option>
+		<option value="mercedes">Mercedes</option>
+		<option value="audi">Audi</option>
+	</select>
+	<select name="cars" id="quantidade">
+		<option value="volvo">Volvo</option>
+		<option value="saab">Saab</option>
+		<option value="mercedes">Mercedes</option>
+		<option value="audi">Audi</option>
+	</select>
+</form>
+
+<button onclick="handleSubmit()">
+	Criar
+</button>
+<form id="hidden_form" hidden action="/Pedido/" method="post">
+	{% csrf_token %} {{ form }}
+	<input type="submit" value="Submit" />
+</form>

@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.views import View
 from .models import Instituicao, Pedido, Produto
-from .forms import InstituicaoRegisterForm
+from .forms import InstituicaoRegisterForm, ProdutoPedir
 
 # Create your views here.
 class Login(View):
@@ -59,7 +59,7 @@ class Register(View):
 
 
 def typeOrder(request):
-    return HttpResponse('Pagina para escolher o tipo de pedido')
+    return render(request, "blog/typeOrder.html")
 
 class RecipientInfo(View):
     def get(self, request):
@@ -75,13 +75,22 @@ class RecipientInfo(View):
         idade = request.POST['idade']
         numeroElementosAgregado = request.POST['numeroElementosAgregado']
 
+
 class Order(View):
     def get(self, request):
-        return render(request, 'blog/order.html')
+        form = ProdutoPedir()
+        return render(request, 'blog/order.html',{"form":form})
 
-    def post(self, request, instituicao):
-        produto = request.POST['produto']
-        quantidade = request.POST['quantidade']
+    def post(self, request):
+        #produto = request.POST['produto']
+        #quantidade = request.POST['quantidade']
+        form = ProdutoPedir(request.POST)
+        if form.is_valid():
+            cartaoCidadao = form.cleaned_data['cartaoCidadao']
+            print(cartaoCidadao)
+            return redirect("login")
+        else:
+            return HttpResponse(form)
 
 
 

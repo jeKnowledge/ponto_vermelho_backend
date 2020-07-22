@@ -39,17 +39,6 @@ class InstituicaoLoginForm():
         ]
 
 
-class ProdutoPedir():
-    class Meta:
-        model = Pedido
-        fields = [
-            'produto',
-            'instituicao',
-            'nomeBeneficiario',
-            'nomeTecnico',
-            'cartaoCidadao',
-            'telefone',
-            'sexo',
-            'idade',
-            'numeroElementosAgregado'
-        ]
+class ProdutoPedir(forms.Form):
+    cartaoCidadao = forms.CharField( max_length=100)
+    produto = forms.CharField( max_length=100)
