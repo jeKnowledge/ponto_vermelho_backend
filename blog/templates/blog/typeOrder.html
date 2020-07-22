@@ -1,0 +1,25 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beneficiario</title>
+</head>
+<body>
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Join</legend>
+                <input type="checkbox" class="form-control" placeholder="Requisicao Interna" name="username" id="id_username"> <br>
+                <input type="checkbox" class="form-control" placeholder="Individual" name="instituicao" id="id_instituicao"> <br>
+                <input type="checkbox" class="form-control" placeholder="Agregado" name="publicoAlvo" id="id_publico"> <br>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">seguinte</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

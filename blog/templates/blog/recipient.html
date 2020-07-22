@@ -1,0 +1,26 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beneficiario</title>
+</head>
+<body>
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">New</legend>
+                <input type="text" class="form-control" placeholder="Nome do Tecnico" name="nomeTecnico" required="" id="id_nomeTecnico"> <br>
+                <input type="text" class="form-control" placeholder="Nome Beneficiario" name="nomeBeneficiario" required="" id="id_nomeBeneficiario"> <br>
+                <input type="text" class="form-control" placeholder="Nº Cartao de Cidadao" name="cartaoCidadao" required="" id="id_cartaoCidadao"> <br>
+                <input type="text" class="form-control" placeholder="Contacto Telefone" name="telefone" required="" id="id_telefone"> <br>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">criar</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
