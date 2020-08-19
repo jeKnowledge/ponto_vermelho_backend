@@ -61,25 +61,30 @@ class Register(View):
 def typeOrder(request):
     return render(request, "blog/typeOrder.html")
 
+def personId(request):
+    return render(request, "blog/personId.html")
+
 class RecipientInfo(View):
     def get(self, request):
         return render(request, 'blog/recipient.html')
 
     def post(self, request):
-        instituicao = Instituicao.objects.get(instituicao = instituicao)
+        equipa = request.user.username
+        instituicao = request.user.instituicao
         nomeBenefeciario = request.POST['nomeBenefeciario']
         nomeTecnico = request.POST['nomeTecnico']
         cartaoCidadao = request.POST['cartaoCidadao']
         telefone = request.POST['telefone']
-        sexo = request.POST['sexo']
-        idade = request.POST['idade']
+        #sexo = request.POST['sexo']
+        #idade = request.POST['idade']
         numeroElementosAgregado = request.POST['numeroElementosAgregado']
 
 
 class Order(View):
     def get(self, request):
         form = ProdutoPedir()
-        return render(request, 'blog/order.html',{"form":form})
+        query = Produto.objects.all()
+        return render(request, 'blog/order.html',{"form":form, 'products':query})
 
     def post(self, request):
         #produto = request.POST['produto']
@@ -93,16 +98,16 @@ class Order(View):
             return HttpResponse(form)
 
 
-
-
-'''
 class OrderPage(View):
     def get(self, request):
-        return HttpResponse('Pagina com o estado de todos os pedidos')
-'''
+        user = request.user
+        orders = Pedido.objects.filter(instituicao = user)
+        return render(request, 'blog/orderpage.html')
 
+'''
 def orderPage(request):
     return HttpResponse('Pagina com o estado de todos os pedidos')
+'''
 
 def signOut(request):
     logout(request)

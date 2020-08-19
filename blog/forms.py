@@ -12,13 +12,13 @@ publico_alvo = [
 ]
 
 class InstituicaoRegisterForm(UserCreationForm):
-    publicoAlvo = forms.CharField(label = "Publico Alvo", widget = forms.Select(choices = publico_alvo))
+    #publicoAlvo = forms.CharField(label = "Publico Alvo", widget = forms.Select(choices = publico_alvo))
     class Meta:
         model = Instituicao
         fields = [#'nomeEquipa',
         'username',
         'instituicao',
-        #'publicoAlvo',
+        'publicoAlvo',
         'areaGeografica',
         'telefone',
         'email',
@@ -42,3 +42,10 @@ class InstituicaoLoginForm():
 class ProdutoPedir(forms.Form):
     cartaoCidadao = forms.CharField( max_length=100)
     produto = forms.CharField( max_length=100)
+    '''
+    class Meta:
+        model = Produto
+        fields = [
+            ''
+        ]
+        '''

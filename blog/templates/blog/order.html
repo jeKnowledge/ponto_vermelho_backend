@@ -11,17 +11,17 @@
 	};
 </script>
 <form id="final_form">
-	<select name="cars" id="produto">
-		<option value="volvo">Volvo</option>
-		<option value="saab">Saab</option>
-		<option value="mercedes">Mercedes</option>
-		<option value="audi">Audi</option>
+	<select name="produto" id="produto">
+		{% for product in products %}
+		<option value="{{product.tipoProduto}}">{{product.tipoProduto}}</option>
+		{% endfor %}
 	</select>
-	<select name="cars" id="quantidade">
-		<option value="volvo">Volvo</option>
-		<option value="saab">Saab</option>
-		<option value="mercedes">Mercedes</option>
-		<option value="audi">Audi</option>
+	<select name="quantidade" id="quantidade">
+		<!--
+		{% for quantidade in quantidades %}
+		<option value="{{quantidade"
+		{% endfor %}
+		-->
 	</select>
 </form>
 

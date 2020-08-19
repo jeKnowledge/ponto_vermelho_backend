@@ -14,10 +14,18 @@
                 <legend class="border-bottom mb-4">Join</legend>
                 <input type="text" class="form-control" placeholder="Nome da Equipa/Serviço" name="username" required="" id="id_username"> <br>
                 <input type="text" class="form-control" placeholder="Instituição" name="instituicao" required="" id="id_instituicao"> <br>
-                <input type="text" class="form-control" placeholder="Publico Alvo" name="publicoAlvo" required="" id="id_publico"> <br>
+                <label>Publico Alvo</label>
+                <p>
+                    <select name="publicoAlvo" id="id_publicoAlvo">
+                        <option value="população sem abrigo">População Sem Abrigo</option>
+                        <option value="beneficiários do Rendimento Social de Inserção">Beneficiários do Rendimento Social de Inserção</option>
+                        <option value="grávidas em situação de risco">Grávidas em Situação de Risco</option>
+                        <option value="vítimas de violência doméstica">Vítimas de Violência Doméstica</option>
+                        <option value="outros">Outros</option>
+                    </select>
+                </p>
                 <input type="text" class="form-control" placeholder="Area Geografica" name="areaGeografica" required="" id="id_area"> <br>
                 <input type="text" class="form-control" placeholder="Telefone" name="telefone" required="" id="id_telefone"> <br>
-                <input type="text" class="form-control" placeholder="Area Geografica" name="areaGeografica" required="" id="id_password"> <br>
                 <input type="email" class="form-control" placeholder="E-mail" name="email" maxlength="255" required="" id="id_email"> <br>
                 <input type="password" class="form-control" placeholder="Password" name="password1" required="" id="id_password1"> <br>
                 <input type="password" class="form-control" placeholder="Confirmar Password" name="password2" required="" id="id_password2"> <br>  
