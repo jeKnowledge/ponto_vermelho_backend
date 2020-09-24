@@ -1,0 +1,302 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "Poppins", sans-serif;
+}
+
+#home {
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	display: inline-block;
+}
+
+/*----------------------------INTRO------------------------------*/
+.tab {
+	height: 100%;
+	display: none;
+}
+
+.intro {
+	background-color: #ffffff;
+	height: 100%;
+	width: calc(100% - 55%);
+	box-shadow: 8px 4px 10px rgba(0, 0, 0, 0.2);
+	z-index: 2;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.intro img {
+	position: absolute;
+	width: 70%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+#leave {
+	position: absolute;
+	z-index: 10;
+	bottom: 4%;
+	left: 2%;
+}
+
+/*----------------------------FORM------------------------------*/
+.plus-button {
+	background-color: #0181d3;
+	text-align: center;
+	color: white;
+	padding: 1%;
+	border-radius: 10px;
+}
+
+.product-div {
+	margin-bottom: 5%;
+}
+
+.request {
+	position: relative;
+	max-width: 55%;
+	height: 100%;
+	background-color: #0181d3;
+	margin-left: calc(100% - 55%);
+}
+
+.request-kind {
+	position: absolute;
+	background: #ffffff;
+	box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
+	border-radius: 15px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 80%;
+	height: 85%;
+}
+
+.kind-container {
+	padding: 10% 15%;
+}
+
+input.middle:focus {
+	outline-width: 0;
+}
+.kind-container label {
+	font-weight: 300;
+	color: #0181d3;
+}
+
+.kind-container h2 {
+	font-size: 2em;
+	color: #0181d3;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+	outline: none;
+}
+
+.kind-check {
+	margin-top: 10%;
+}
+
+.clothing-container {
+	height: 65%;
+	padding: 10% 15%;
+	overflow: hidden;
+	overflow-y: scroll;
+}
+
+.clothing-container label {
+	font-weight: 300;
+	color: #0181d3;
+}
+
+.clothing-container h2 {
+	font-size: 2em;
+	color: #0181d3;
+}
+.clothing-line {
+	display: flex;
+	justify-content: space-between;
+}
+.clothing-field {
+	display: block;
+	margin-top: 5%;
+	position: relative;
+}
+.clothing-field select {
+	width: 100%;
+	padding: 7.5px 0;
+	border-style: none;
+	border-bottom: 1px solid #0181d3;
+	box-sizing: border-box;
+	color: #014e82;
+}
+.clothing-field select[name="description"] {
+	width: 160%;
+}
+.clothing-field select[name="quantity"] {
+}
+
+.container {
+	display: block;
+	position: relative;
+	padding-left: 35px;
+	cursor: pointer;
+	font-size: 1em;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.container input {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+	height: 0;
+	width: 0;
+}
+
+.checkmark {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 25px;
+	width: 25px;
+	background: #ffffff;
+	border: 1px solid #0181d3;
+	box-sizing: border-box;
+}
+
+.container:hover input ~ .checkmark {
+	background: #eeeeee;
+}
+
+.container input:checked ~ .checkmark {
+	background-color: #0181d3;
+}
+
+.checkmark:after {
+	content: "";
+	position: absolute;
+	display: none;
+}
+
+.container input:checked ~ .checkmark:after {
+	display: block;
+}
+
+.container .checkmark:after {
+	left: 8px;
+	top: 4px;
+	width: 5px;
+	height: 10px;
+	border: solid white;
+	border-width: 0 3px 3px 0;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+.request-but {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	position: absolute;
+	bottom: 10%;
+}
+.request-but a {
+	cursor: pointer;
+	margin: 0 15%;
+}
+.request-but button {
+	cursor: pointer;
+	background-color: transparent;
+	border-style: none;
+}
+.request-but #back {
+	cursor: default;
+}
+.request-but a:hover {
+	opacity: 0.6;
+}
+@media screen and (max-width: 600px) {
+	.kind-container h2 {
+		font-size: 1.2em;
+	}
+	.kind-container label {
+		font-size: 12px;
+	}
+}
+/*----------------------------ID------------------------------*/
+.id-container {
+	padding: 10% 15%;
+}
+
+.id-container label {
+	font-weight: 300;
+	color: #0181d3;
+}
+
+.id-container h2 {
+	font-size: 1.5em;
+	color: #0181d3;
+}
+
+.id-field {
+	display: block;
+	margin-top: 15%;
+	position: relative;
+}
+.id-field input {
+	width: 100%;
+	padding: 7.5px 0;
+	border-style: none;
+	border-bottom: 1px solid #0181d3;
+	box-sizing: border-box;
+	color: #014e82;
+}
+.id-field input:focus {
+	border-bottom: 1px solid #014e82;
+}
+.id-field input::-webkit-outer-spin-button,
+.id-field input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+.id-nums {
+	display: flex;
+	justify-content: space-between;
+}
+.num {
+	width: 40%;
+}
+@media screen and (max-width: 600px) {
+	.id-container h2 {
+		font-size: 1em;
+	}
+	.id-container label {
+		font-size: 12px;
+	}
+}
+
+/*----------------------------QUERIES------------------------------*/
+@media screen and (max-width: 940px) {
+	.request {
+		max-width: 100%;
+		margin-left: 0;
+	}
+	.form-check {
+		margin-top: 25%;
+	}
+	.intro {
+		display: none;
+	}
+}
+@media screen and (max-width: 600px) {
+}

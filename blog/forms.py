@@ -11,11 +11,10 @@ publico_alvo = [
     ["outros", "outros"]
 ]
 
-class InstituicaoRegisterForm(UserCreationForm):
-    #publicoAlvo = forms.CharField(label = "Publico Alvo", widget = forms.Select(choices = publico_alvo))
+class SignUpForm(UserCreationForm):
     class Meta:
         model = Instituicao
-        fields = [#'nomeEquipa',
+        fields = [
         'username',
         'instituicao',
         'publicoAlvo',
@@ -23,20 +22,13 @@ class InstituicaoRegisterForm(UserCreationForm):
         'telefone',
         'email',
         'password1',
-        'password2'
+        "password2"
         ]
 
 
-class InstituicaoLoginForm():
-    email = forms.EmailField(max_length = 100)
+class LoginForm(forms.Form):
+    email = forms.EmailField(max_length = 50)
     password = forms.CharField(widget = forms.PasswordInput)
-
-    class Meta:
-        model = Instituicao
-        fields = [
-            'email',
-            'password'
-        ]
 
 
 class ProdutoPedir(forms.Form):

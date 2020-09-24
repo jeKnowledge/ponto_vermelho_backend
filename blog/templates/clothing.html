@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+	<head>
+		<meta charset="utf-8" />
+		<link
+			rel="icon"
+			type="image/png"
+			href="./img/favicon-32x32.png"
+			sizes="32x32"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			href="./img/favicon-16x16.png"
+			sizes="16x16"
+		/>
+		<meta
+			name="viewport"
+			content="user-scalable=no, initial-scale=1, height=device-height"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="./css/clothing.css" />
+		<title>Pedido</title>
+	</head>
+
+	<body>
+		<main>
+			<section id="home">
+				<div class="intro">
+					<a href="index.html"
+						><img src="./img/logo.png" alt="logo-ponto-vermelho"
+					/></a>
+				</div>
+
+				<a href="index.html" id="leave">Sair</a>
+
+				<div class="clothing">
+					<form class="clothing-request" method="post" action="">
+						<div class="clothing-but">
+							<a id="back" style="opacity: 0.3;"
+								><img src="./img/back.svg" alt="back-arrow"
+							/></a>
+							<a id="next" onclick="submition()"
+								><img src="./img/next.svg" alt="next-arrow"
+							/></a>
+							<a id="sub" style="display: none;"
+								><button type="submit" name="button">
+									<img
+										src="./img/next.svg"
+										alt="next-arrow"
+									/></button
+							></a>
+						</div>
+					</form>
+				</div>
+			</section>
+		</main>
+	</body>
+</html>

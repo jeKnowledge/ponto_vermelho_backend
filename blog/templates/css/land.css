@@ -1,0 +1,450 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+nav {
+  position: absolute;
+  display: flex;
+}
+
+nav img {
+  width: 15%;
+}
+
+nav a {
+  margin: 1.5%;
+}
+
+nav #portal {
+  text-decoration: none;
+  background-color: #0181D3;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 0.5% 3%;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 100px;
+  position: fixed;
+  right: 0;
+  z-index: 10;
+  transition: 0.4s;
+}
+
+nav #portal:hover {
+  transform: scale(1.02, 1.02);
+  background-color: rgba(1, 129, 211, 0.8);
+}
+
+@media only screen and (max-width: 880px) {
+  nav img {
+    width: 30%;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  nav #portal {
+    font-size: 12px;
+    padding: 1% 4%;
+  }
+}
+
+/*----------------------------INTRO------------------------------*/
+#intro h1 {
+  text-align: center;
+  padding: 20% 0;
+  font-size: 4em;
+  color: #0181D3;
+}
+
+@media only screen and (max-width: 550px) {
+  #intro h1 {
+    font-size: 2em;
+  }
+}
+
+/*----------------------------ABOUT------------------------------*/
+#about {
+  display: block;
+  width: 98%;
+  margin: 0 auto;
+  border-radius: 15px;
+  background-color: rgba(1, 129, 211, 0.1);
+}
+
+.about-container {
+  display: flex;
+  padding: 6% 10%;
+  position: relative;
+}
+
+.about-container img {
+  width: 45%;
+  height: 45%;
+  box-shadow: -10px 10px #0181D3;
+  border-radius: 15px;
+}
+
+.about-info {
+  margin-left: 4%;
+}
+
+.about-info h1 {
+  font-size: 3em;
+  color: #0181D3;
+}
+
+.about-info p {
+  margin-top: 2%;
+  color: #014E82;
+}
+
+@media only screen and (max-width: 880px) {
+  .about-container {
+    display: block;
+    padding: 6% 0;
+  }
+
+  .about-container img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+  }
+
+  .about-info {
+    margin: 0;
+    padding: 4% 10%;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .about-container img {
+    box-shadow: -5px 5px #0181D3;
+  }
+
+  .about-info h1 {
+    font-size: 1.2em;
+  }
+
+  .about-info {
+    font-size: 14px;
+  }
+}
+
+/*----------------------------ACCORDION------------------------------*/
+.accordion-container {
+  display: flex;
+  margin: 8% 8%;
+}
+
+.accordion:hover .accordion-item:hover .accordion-item-content,
+.accordion .accordion-item--default .accordion-item-content {
+  max-height: 20em;
+  transition: max-height 0.5s ease-in;
+}
+
+.accordion-item-content,
+.accordion:hover .accordion-item-content {
+  max-height: 0;
+  transition: max-height 0.5s ease-out;
+  overflow: hidden;
+}
+
+.accordion {
+  width: 100%;
+  margin: 2% 2%;
+}
+
+.accordion-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.accordion-title span {
+  color: #FFFFFF;
+  padding: 2px 9.5px;
+  border-radius: 100%;
+  background: #0181D3;
+  text-decoration: none;
+}
+
+.accordion .accordion-item {
+  padding: 1em 1.5em;
+  background-color: #ffffff;
+  box-shadow: 4px 4px 30px rgba(0, 0, 0, 0.25);
+  border-radius: 25px;
+}
+
+.accordion h1 {
+  color: #0181D3;
+}
+
+.accordion p {
+  padding-top: 20px;
+  color: #014E82;
+  width: 90%;
+  font-size: 1em;
+}
+
+@media only screen and (max-width: 880px) {
+  .accordion-container {
+    display: block;
+    margin: 10% 10%;
+  }
+
+  .accordion {
+    margin: 4% 0;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .accordion-container {
+    margin-top: 14%;
+  }
+
+  .accordion h1 {
+    font-size: 1em;
+  }
+
+  .accordion-title span {
+    padding: 0.5px 8px;
+  }
+
+  .accordion p {
+    padding-top: 20px;
+    color: #014E82;
+    width: 90%;
+    font-size: 14px;
+  }
+
+  .accordion {
+    margin-top: 6%;
+  }
+
+  .accordion .accordion-item {
+    padding: 0.75em 1.25em;
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.25);
+  }
+}
+
+/*----------------------------HELP------------------------------*/
+#help {
+  padding-bottom: 4%;
+}
+
+#help h1 {
+  font-size: 3em;
+  color: #0181D3;
+  margin-left: 10%;
+}
+
+a.mapboxgl-ctrl-logo {
+  width: 22px;
+}
+
+.mobile {
+  display: none;
+}
+
+.mapboxgl-ctrl-attrib.mapboxgl-compact:after {
+  display: none;
+}
+
+.help-element {
+  margin: 4% 10%;
+  display: flex;
+}
+
+.map {
+  width: 460px;
+  height: 315px;
+  border-radius: 15px;
+  transition: 0.3s;
+}
+
+.map:hover {
+  transform: scale(1.015, 1.015);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.help-info {
+  margin-left: 4%;
+  color: #014E82;
+}
+
+.help-info:nth-child(1) {
+  margin-left: 0;
+}
+
+.help-map:nth-child(2) {
+  margin-left: 4%;
+}
+
+.help-info h2 {
+  font-size: 1em;
+}
+
+.volunteer {
+  margin: 8% auto;
+  position: relative;
+  background-image:
+    linear-gradient(to bottom, rgba(1, 129, 211, 0.5), rgba(1, 78, 130, 0.8)), url('../img/cvp_braga2.jpg');
+  width: 80%;
+  height: 78vh;
+  background-size: cover;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 15px;
+}
+
+.volunteer-info {
+  background-color: #FFFFFF;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  padding: 4%;
+  width: 50%;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1, 1);
+  transition: 0.3s;
+}
+
+.volunteer-info:hover {
+  transform: translate(-50%, -50%) scale(1.03, 1.03);
+}
+
+.volunteer-info h2 {
+  color: #014E82;
+  font-size: 1em;
+}
+
+.volunteer-info p {
+  margin-top: 2%;
+  color: #014E82;
+}
+
+.volunteer-info a {
+  text-decoration: none;
+  color: #0181D3;
+  transition: 0.7s;
+}
+
+.volunteer-info a:hover {
+  opacity: 0.5;
+}
+
+@media only screen and (max-width: 880px) {
+  .web {
+    display: none;
+  }
+
+  .mobile {
+    display: block;
+  }
+
+  .help-element {
+    margin-top: 4%;
+    display: block;
+  }
+
+  .help-map {
+    margin-right: 0;
+  }
+
+  .help-info {
+    margin-left: 0;
+    margin-top: 2%;
+  }
+
+  .help-map:nth-child(2) {
+    margin-left: 0;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  #help {
+    padding-bottom: 10%;
+  }
+
+  #help h1 {
+    padding-top: 10%;
+    font-size: 1.2em;
+  }
+
+  .map {
+    width: 360px;
+    height: 215px;
+    width: 100%;
+  }
+
+  .help-map:nth-child(2) {
+    margin-top: 10%;
+  }
+
+  .help-info {
+    margin: 4% 0;
+  }
+
+  .help-info h2 {
+    font-size: 14px;
+  }
+
+  .help-info p {
+    font-size: 14px;
+  }
+
+  .help-map {
+    margin-top: 6%;
+  }
+
+  .volunteer {
+    height: 62vh;
+  }
+
+  .volunteer-info {
+    padding: 4%;
+    width: 70%;
+    font-size: 14px;
+  }
+}
+
+/*----------------------------FOOTER------------------------------*/
+footer {
+  background-color: #0181D3;
+  padding: 5% 0;
+}
+
+footer .social {
+  display: flex;
+  justify-content: center;
+  border-bottom: 1.5px solid #FFFFFF;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.social a {
+  transition: 0.3s;
+  margin-bottom: 2%;
+}
+
+.social a:hover {
+  transform: scale(1.08, 1.08);
+}
+
+.copyright {
+  float: right;
+  text-align: right;
+  margin-right: 10%;
+  color: #FFFFFF;
+  font-size: 14px;
+}
+
+@media only screen and (max-width: 550px) {
+  .copyright {
+    font-size: 12px;
+  }
+}

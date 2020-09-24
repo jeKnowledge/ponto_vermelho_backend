@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+	<head>
+		{% load static %}
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/png" href="{% static
+		"./img/favicon-32x32.png"%}" sizes="32x32" /> <link rel="icon"
+		type="image/png" href="{% static "./img/favicon-16x16.png"%}"
+		sizes="16x16" />
+		<meta
+			name="viewport"
+			content="user-scalable=no, initial-scale=1, height=device-height"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="{% static "./css/style.css"%}" />
+		<title>Ponto Vermelho</title>
+	</head>
+
+	<body>
+		<main>
+			<section id="home">
+				<div class="log-in">
+					<form class="log-in-form" method="POST">
+						{% csrf_token %}
+						<div class="form-container">
+							<div class="form-img">
+								<a href="/"
+									><img src="{% static "./img/logo.png"%}"
+									alt="logo-ponto-vermelho" /></a
+								>
+							</div>
+
+							<div class="error-div">
+								{% if messages %} {% for message in messages %}
+								<p>
+									{{message}}
+								</p>
+								{% endfor %} {% endif %}
+							</div>
+							<div class="form-field">
+								<label for="mail">E-mail</label>
+								<br />
+								{{form.email}}
+							</div>
+
+							<div class="form-field">
+								<label for="pass">Password</label>
+								<br />
+								{{form.password}}
+							</div>
+
+							<div class="form-check">
+								<label>
+									<input
+										type="checkbox"
+										checked="checked"
+										name="remember"
+									/>
+									Memorizar
+								</label>
+							</div>
+
+							<div class="form-but">
+								<button type="submit">Entrar</button>
+								<a href="/signup"
+									><button type="button">
+										Criar conta
+									</button></a
+								>
+							</div>
+						</div>
+					</form>
+				</div>
+
+				<div class="about">
+					<div class="about-text">
+						<h1>Bem-Vindo</h1>
+						<p>
+							Seja bem-vindo/a à área institucional do Ponto
+							Vermelho - área reservada a equipas de atendimento e
+							ação social, do concelho de Braga.<br /><br />
+							Esta plataforma foi criada com o intuito de promover
+							o desempenho ambiental do nosso serviço, ao diminuir
+							a quantidade de papel utilizado, e de auxiliar as
+							equipas na submissão e acompanhamento dos pedidos
+							para os beneficiários que atendem. Todos os campos
+							têm correspondência com o nosso Regulamento Interno,
+							que pode ser consultado em:<br /><br />
+							Agradecemos desde já a colaboração de todos os
+							parceiros deste projeto, em particular: às pessoas e
+							entidades que nos doam os bens; aos clientes que
+							garantem a sustentabilidade financeira da nossa
+							estrutura; às equipas que prestam assistência à
+							população mais desfavorecida; e aos voluntários e
+							voluntárias que auxiliam em toda a logística.<br /><br />
+							Caso tenha alguma dúvida, por favor
+							<a
+								href="mailto:dbraga.pontovermelho@cruzvermelha.org.pt"
+								>contacte</a
+							>.
+						</p>
+					</div>
+				</div>
+			</section>
+		</main>
+	</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		{% load static %}
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="user-scalable=no, initial-scale=1, height=device-height"
+		/>
+		<link rel="icon" type="image/png" href="{% static
+		"./img/favicon-32x32.png"%}" sizes="32x32" /> <link rel="icon"
+		type="image/png" href="{% static "img/favicon-16x16.png"%}"
+		sizes="16x16" />
+		<script
+			type="text/javascript"
+			src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"
+		></script>
+		<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+		<script src="https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js"></script>
+		<link
+			href="https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://unpkg.com/aos@2.3.1/dist/aos.css"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="{% static "css/land.css" %}" />
+		<title>Ponto Vermelho</title>
+	</head>
+
+	<body>
+		<header>
+			<nav>
+				<a href="/"
+					><img src="{% static "./img/logo.png"%}" alt="logo" /></a
+				>
+				<a id="portal" href="/login">Portal</a>
+			</nav>
+		</header>
+
+		<main>
+			<section id="intro">
+				<h1 id="quote">GOOD FOR THE POCKET</h1>
+			</section>
+
+			<script>
+				var text = [
+					"GOOD FOR THE POCKET",
+					"GOOD FOR THE PLANET",
+					"GOOD FOR THE PEOPLE"
+				];
+				var counter = 1;
+				var elem = document.getElementById("quote");
+				var inst = setInterval(change, 1000);
+
+				function change() {
+					elem.innerHTML = text[counter];
+					counter++;
+					if (counter >= text.length) {
+						counter = 0;
+					}
+				}
+			</script>
+
+			<section id="about" data-aos="fade-up">
+				<div class="about-container">
+					<img src="{% static "img/cvp_braga1.jpg" %}" />
+
+					<div class="about-info">
+						<h1>Sobre nós</h1>
+						<p>
+							O Ponto Vermelho é uma loja da Delegação de Braga da
+							Cruz Vermelha Portuguesa que recebe, faz a triagem,
+							e distribui bens em primeira e segunda-mão. A
+							distribuição é feita de forma gratuita às pessoas e
+							famílias com maior dificuldade socioeconómica do
+							concelho de Braga e através de vendas a preços
+							simbólicos ao público em geral.<br /><br />
+							Na nossa loja pode encontrar: roupa de adulto e
+							criança, calçado, artigos para o bebé, brinquedos,
+							livros e têxteis-lar.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section id="compare">
+				<div class="accordion-container">
+					<div class="accordion" data-aos="fade-right">
+						<section class="accordion-item">
+							<div class="accordion-title">
+								<h1>A nossa missão</h1>
+								<span>+</span>
+							</div>
+							<div class="accordion-item-content">
+								<p>
+									Existimos para diminuir as desigualdades
+									sociais no acesso a bens de primeira
+									necessidade e promover a economia circular
+									por via do incentivo à reutilização de bens.
+								</p>
+							</div>
+						</section>
+					</div>
+
+					<div class="accordion" data-aos="fade-left">
+						<section class="accordion-item">
+							<div class="accordion-title">
+								<h1>A nossa visão</h1>
+								<span>+</span>
+							</div>
+							<div class="accordion-item-content">
+								<p>
+									Acreditamos que todas as pessoas devem ter
+									acesso aos bens mais básicos de uma forma
+									digna, e por isso garantimos um atendimento
+									personalizado e justo, bem como produtos de
+									qualidade. Queremos que ninguém fique para
+									trás, e assim trabalhamos em parceria com
+									todos os serviços e instituições sociais do
+									concelho de Braga.
+								</p>
+							</div>
+						</section>
+					</div>
+				</div>
+			</section>
+
+			<section id="help" data-aos="fade-up">
+				<h1>Como nos pode ajudar?</h1>
+
+				<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.js"></script>
+				<link
+					rel="stylesheet"
+					href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.css"
+					type="text/css"
+				/>
+				<div id="comparison-container">
+					<div class="help-element">
+						<div class="help-map">
+							<div id="before" class="map"></div>
+						</div>
+						<div class="help-info">
+							<h2>Faça uma Doação</h2>
+							<p>
+								Entregue os bens que já não usa e estejam em bom
+								estado no nosso contentor, acessível 24 horas
+								por dia. Está situado nas instalações
+								temporárias da Delegação de Braga da Cruz
+								Vermelha Portuguesa (Rua Bernardo Sequeira, no
+								246, São Victor – Braga)
+							</p>
+						</div>
+					</div>
+
+					<div class="help-element">
+						<div class="help-info web">
+							<h2>Compre na nossa Loja:</h2>
+							<p>
+								Compre artigos a preços simbólicos na nossa loja
+								e contribua para a sustentabilidade da Cruz
+								Vermelha de Braga. Visite-nos na Rua Francisco
+								Machado Owen, no 152, no seguinte horário:
+							</p>
+							<br />
+							<p>
+								<b>Segunda-feira</b>
+								<br />
+								14h30 – 18h00
+								<br />
+								<b>Terça a Sexta-feira</b>
+								<br />
+								10h00 – 12h30 | 14h30 – 18h00
+							</p>
+						</div>
+						<div class="help-map">
+							<div id="after" class="map"></div>
+						</div>
+						<div class="help-info mobile">
+							<h2>Compre na nossa Loja:</h2>
+							<p>
+								Compre artigos a preços simbólicos na nossa loja
+								e contribua para a sustentabilidade da Cruz
+								Vermelha de Braga. Visite-nos na Rua Francisco
+								Machado Owen, no 152, no seguinte horário:
+							</p>
+							<br />
+							<p>
+								<b>Segunda-feira</b>
+								<br />
+								14h30 – 18h00
+								<br />
+								<b>Terça a Sexta-feira</b>
+								<br />
+								10h00 – 12h30 | 14h30 – 18h00
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="volunteer" data-aos="fade-up">
+					<div class="volunteer-info">
+						<h2>Torne-se voluntário:</h2>
+						<p>
+							o Ponto Vermelho apenas é possível graças aos seus
+							voluntários, que colaboram em toda a logística e
+							atendimento ao público. Se quiser fazer voluntariado
+							connosco, consulte as informações em:
+						</p>
+						<a
+							target="_blank"
+							href="https://braga.cruzvermelha.pt/voluntariado-braga.html"
+							>https://braga.cruzvermelha.pt</a
+						>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<footer>
+			<div class="social">
+				<a href="tel:+351-253-20-88-70" target="_blank"
+					><img src="{% static "./img/social/call.png"%}"
+					alt="logo-call" width="65%" /></a
+				>
+				<a
+					href="mailto:dbraga.pontovermelho@cruzvermelha.org.pt"
+					target="_blank"
+					><img src="{% static "./img/social/mail.png"%}"
+					alt="logo-email" width="65%" /></a
+				>
+				<a
+					href="https://www.facebook.com/ponto.vermelho/"
+					target="_blank"
+					><img src="{% static "./img/social/face.png"%}"
+					alt="logo-facebook" width="65%" /></a
+				>
+				<a
+					href="https://www.instagram.com/ponto.vermelho.braga/"
+					target="_blank"
+					><img src="{% static "./img/social/insta.png"%}"
+					alt="logo-instagram" width="65%" /></a
+				>
+			</div>
+			<div class="copyright">
+				<p>© jeKnowledge 2020. ALL RIGHTS RESERVED</p>
+			</div>
+		</footer>
+
+		<script>
+			AOS.init();
+		</script>
+		<script src="{% static "js/map.js"%}"></script>
+	</body>
+</html>

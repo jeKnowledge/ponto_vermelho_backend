@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+	<head>
+		{% load static %}
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/png" href="{% static
+		"./img/favicon-32x32.png"%}" sizes="32x32" /> <link rel="icon"
+		type="image/png" href="{% static "./img/favicon-16x16.png"%}"
+		sizes="16x16" />
+		<meta
+			name="viewport"
+			content="user-scalable=no, initial-scale=1, height=device-height"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="{% static "./css/new.css"%}">
+		<title>Ponto Vermelho</title>
+	</head>
+
+	<body>
+		<main>
+			<section id="home">
+				<div class="create-account">
+					<form class="create-account-form" method="POST">
+						{% csrf_token %}
+						<div class="form-container">
+							<div class="form-img">
+								<a href="index.html"
+									><img src="{% static "./img/logo.png"%}"
+									alt="logo-ponto-vermelho"></a
+								>
+							</div>
+
+							<div class="error-div">
+								{% if messages %} {% for message in messages %}
+								<p>
+									{{message}}
+								</p>
+								{% endfor %} {% endif %}
+							</div>
+
+							<div class="form-line">
+								<div class="form-field">
+									<label for="name"
+										>Nome da equipa/serviço:</label
+									>
+									<br />
+									{{form.username}}
+								</div>
+
+								<div class="form-field">
+									<label for="institution"
+										>Instituição:</label
+									>
+									<br />
+									{{form.instituicao}}
+								</div>
+							</div>
+
+							<div class="form-line">
+								<div class="form-field public">
+									<label for="public">Público-alvo:</label>
+									<br />
+									{{form.publicoAlvo}}
+								</div>
+
+								<div class="form-field">
+									<label for="public-kind">Outro:</label>
+									<br />
+									<input
+										type="name"
+										name="public-kind"
+										required
+									/>
+								</div>
+							</div>
+
+							<div class="form-line">
+								<div class="form-field">
+									<label for="area"
+										>Área geográfica de abrangência:</label
+									>
+									<br />
+									{{form.areaGeografica}}
+								</div>
+
+								<div class="form-field">
+									<label for="contact"
+										>Contacto telefónico:</label
+									>
+									<br />
+									{{form.telefone}}
+								</div>
+							</div>
+
+							<div class="form-line">
+								<div class="form-field">
+									<label for="mail">E-mail:</label>
+									<br />
+									{{form.email}}
+								</div>
+							</div>
+
+							<div class="form-line">
+								<div class="form-field">
+									<label for="pass">Password:</label>
+									<br />
+									{{form.password1}}
+								</div>
+
+								<div class="form-field">
+									<label for="pass">Confirm Password:</label>
+									<br />
+									{{form.password2}}
+								</div>
+							</div>
+
+							<div class="form-but">
+								<button type="submit">Criar conta</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</section>
+		</main>
+	</body>
+</html>

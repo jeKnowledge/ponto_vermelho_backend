@@ -6,60 +6,72 @@ from django.core.mail import send_mail
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.views import View
+from django.core import serializers
 from .models import Instituicao, Pedido, Produto
-from .forms import InstituicaoRegisterForm, ProdutoPedir
+from .forms import *
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+def index(request):
+    return render(request, "index.html")
+
 class Login(View):
     def get(self, request):
-        return render(request, 'blog/login.html')
+        if(request.user):
+            return redirect("request")
+        form =LoginForm()
+        return render(request, 'login.html',{"form":form})
 
     def post(self, request):
-        email = request.POST['email']
-        password = request.POST['password']
-        user = authenticate(request, username = email, password = password)
-        if user is not None:
-            login(request, user)
-            return redirect('order_page')
-        else:
-            messages.warning(request, 'Email ou Password Invalida')
-            return redirect('login')
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            formData = form.cleaned_data
+            email = formData["email"]
+            password = formData["password"]
+            user = authenticate(request, username = email, password = password)
+            if user is not None:
+                login(request, user)
+                return redirect('request')
+            else:
+                messages.warning(request, 'Email ou Password Invalida')
+                return redirect('login')
 
-        '''
-        return HttpResponse('Pagina Log In Com a informaçao de bem vindo')
-        if request.method == 'POST':
-            form = UserCreationForm(request.POST)
-        '''
 
 class Register(View):
     def get(self, request):
-        return render(request, 'blog/register.html')
+        messages.warning(request, 'Erro no Registo')
+        form = SignUpForm()
+        return render(request, 'signup.html',{"form":form})
 
     def post(self, request):
-        if request.method == 'POST':
-            form = InstituicaoRegisterForm(request.POST)
-            if form.is_valid():
-                form.save()
-                user = form.cleaned_data.get('username')
-                email = form.cleaned_data.get('email')
-                '''   REVER COMO O ENVIO DE EMAIL FUNCIONA QUE ESTA A DAR ERRO
-                send_mail(
-                    'Pedido de Registo',
-                    'O utilizador <str: user> com o email <str: email> pretende criar conta em Ponto Vermelho.',
-                    'joaobernardo.domingues@gmail.com',
-                    ['joaobndomingues@gmail.com'],
-                )
-                '''
-                return redirect('login')
-                #return HttpResponseRedirect(reverse('blog: login'))
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            user = form.cleaned_data.get('username')
+            email = form.cleaned_data.get('email')
+            '''   REVER COMO O ENVIO DE EMAIL FUNCIONA QUE ESTA A DAR ERRO
+            send_mail(
+                'Pedido de Registo',
+                'O utilizador <str: user> com o email <str: email> pretende criar conta em Ponto Vermelho.',
+                'joaobernardo.domingues@gmail.com',
+                ['joaobndomingues@gmail.com'],
+            )
+            '''
+            return redirect('login')
+            #return HttpResponseRedirect(reverse('blog: login'))
         else:
-            form = InstituicaoRegisterForm()
-            return render(request, 'blog/register.html', {'form': form})
+            print(form.errors)
+            messages.warning(request, 'Erro no Registo')
+            return redirect('signup')
         #return HttpResponse('Pagina de Registo para a instituição')
 
 
-def typeOrder(request):
-    return render(request, "blog/typeOrder.html")
+@login_required
+def request_view(request):
+    query = Produto.objects.all()
+    query_json = serializers.serialize("json",query)
+    print(query_json)
+    return render(request, "request.html",{"products": query, "productsJSON":query_json})
 
 def personId(request):
     return render(request, "blog/personId.html")
