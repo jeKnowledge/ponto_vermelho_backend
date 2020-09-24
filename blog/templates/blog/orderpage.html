@@ -4,11 +4,15 @@
     <head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>{{ user.username }}</title>
+        <title>{{ loginUser.username }}</title>
+        <!--<script>
+            const ord = document.getElementById("pedido").value;
+        </script>
+    -->
     </head>
     <body>
         {% for order in orders %}
-            <p>{{ order.produto }}  {{ order.estadoPedido }}</p>
+            <p>{{ order.produto }} - {{ order.estadoPedido }}</p>
         {% endfor %}
     </body>
 </html>

@@ -101,8 +101,8 @@ class Order(View):
 class OrderPage(View):
     def get(self, request):
         user = request.user
-        orders = Pedido.objects.filter(instituicao = user)
-        return render(request, 'blog/orderpage.html')
+        orders = Pedido.objects.filter(equipa = user)
+        return render(request, 'blog/orderpage.html', {'orders': orders, 'loginUser': user})
 
 '''
 def orderPage(request):

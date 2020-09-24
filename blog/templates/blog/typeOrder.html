@@ -16,13 +16,13 @@
 				const agregadoCheckBox = document.getElementById("agregado");
 
 				if (internCheckBox.checked) {
-					window.location.replace("/Pedido");
+					window.location.replace("/pedido");
 					localStorage.setItem("typeOrder", "Intern");
 				} else if (individualCheckBox.checked) {
-					window.location.replace("/Beneficiario");
+					window.location.replace("/beneficiario");
 					localStorage.setItem("typeOrder", "Individual");
 				} else if (agregadoCheckBox.checked) {
-					window.location.replace("/Beneficiario");
+					window.location.replace("/beneficiario");
 					localStorage.setItem("typeOrder", "Agregado");
 				}
 			};

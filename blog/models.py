@@ -69,7 +69,7 @@ estadoPedidos = [
 ]
 
 class Pedido(models.Model):
-    produto = models.CharField(max_length = 3000, default = "")
+    #produto = models.CharField(max_length = 3000, default = "")
     tamanho = models.CharField(max_length = 10, default = "30")
     estadoPedido = models.CharField(max_length = 50, choices = estadoPedidos, default = "Recebido")
     tipoPedido = models.CharField(max_length = 50, choices = tiposPedidos, default = "Individual")
