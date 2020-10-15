@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+
+<head>
+  {% load static %}
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="{% static "./img/favicon-32x32.png" %}" sizes="32x32" />
+  <link rel="icon" type="image/png" href="{% static "./img/favicon-16x16.png" %}" sizes="16x16" />
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, height=device-height" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static "./css/personal.css" %}">
+  <title>Área Pessoal</title>
+</head>
+
+<body>
+  <main>
+    <section id="home">
+
+      <div class="request-icons">
+        <a href="/request"><img src="{% static "img/shop.png" %}" alt="leave-icon" title="Sair"></a>
+        <a href="/signout"><img src="{% static "img/logout.png" %}" alt="leave-icon" title="Sair"></a>
+      </div>
+
+      <div class="personal-area">
+        <div class="personal-info">
+          <img src="{% static "img/logo.png" %}" alt="logo">
+          <h2>{{user.instituicao}}</h2>
+          <a href="#">Alterar Dados</a>
+        </div>
+
+        <div class="personal-requests">
+          <h1>Os meus pedidos</h1>
+          <div class="request-description">
+            <h3>Pedido</h3>
+            <h3>Estado</h3>
+          </div>
+
+          <div class="requests">
+            {% for request in requests %}
+            <div class="request">
+              <div class="request-info">
+                <button class="accordion">{{request.createdAt}}</button>
+                <div class="panel">
+                  <ul>
+                    {% for item in request.listProducts.all %}
+                    <li>{{item.produto}} ({{item.quantidade}})</li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+              <div class="request-status">
+                <p>{{request.estadoPedido}}</p>
+              </div>
+            </div>
+
+            {% endfor %}
+
+
+          </div>
+
+          <script>
+            var acc = document.getElementsByClassName("accordion");
+            var i;
+
+            for (i = 0; i < acc.length; i++) {
+              acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                  panel.style.maxHeight = null;
+                } else {
+                  panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+              });
+            }
+          </script>
+
+    </section>
+
+  </main>
+</body>
+
+</html>

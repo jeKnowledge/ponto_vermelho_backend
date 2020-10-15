@@ -21,7 +21,7 @@ class Login(View):
         if request.user.is_authenticated:
             return redirect("request")
         form =LoginForm()
-        return render(request, 'login.html',{"form":form})
+        return render(request, "login.html",{"form":form})
 
     def post(self, request):
         form = LoginForm(request.POST)
@@ -189,6 +189,11 @@ def request_view(request):
             print(form.errors)
     return render(request, "request.html",{"products": query, "productsJSON":query_json, "form": form})
 
+@login_required
+def personal_view(request):
+    query = Pedido.objects.filter(equipa=request.user)
+    return render(request, "personal.html", {"user": request.user, "requests": query})
+
 def personId(request):
     return render(request, "blog/personId.html")
 
@@ -226,6 +231,7 @@ class Order(View):
             return HttpResponse(form)
 
 
+
 class OrderPage(View):
     def get(self, request):
         user = request.user
@@ -239,7 +245,7 @@ def orderPage(request):
 
 def signOut(request):
     logout(request)
-    return redirect('login')
+    return redirect('index')
 
 
 def ajuda(request):

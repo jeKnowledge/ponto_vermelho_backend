@@ -7,6 +7,6 @@ urlpatterns = [
     path('login/', views.Login.as_view(), name = 'login'),
     path('signup/', views.Register.as_view(), name = 'signup'),
     path('request/', views.request_view, name = 'request'),
-    path('estadopedidos/', views.OrderPage.as_view(), name = 'order_page'),
-    path('logout/', views.signOut, name = 'logout'),
+    path('profile/', views.personal_view, name="personal"),
+    path('signout/', views.signOut, name = 'logout'),
 ]
