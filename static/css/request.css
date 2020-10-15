@@ -105,7 +105,7 @@ button:focus {
 }
 
 .clothing-container {
-	height: 65%;
+	height: 55%;
 	padding: 10% 15%;
 	overflow: hidden;
 	overflow-y: scroll;
@@ -235,7 +235,10 @@ button:focus {
 }
 /*----------------------------ID------------------------------*/
 .id-container {
+	height: 55%;
 	padding: 10% 15%;
+	overflow: hidden;
+	overflow-y: scroll;
 }
 
 .id-container label {

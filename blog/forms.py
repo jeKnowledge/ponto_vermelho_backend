@@ -2,7 +2,6 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import Instituicao, Pedido, Produto
 
-
 publico_alvo = [
     ["população sem abrigo", "população sem abrigo"],
     ["beneficiários do Rendimento Social de Inserção", "beneficiários do Rendimento Social de Inserção"],
@@ -31,13 +30,15 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget = forms.PasswordInput)
 
 
-class ProdutoPedir(forms.Form):
-    cartaoCidadao = forms.CharField( max_length=100)
-    produto = forms.CharField( max_length=100)
-    '''
-    class Meta:
-        model = Produto
-        fields = [
-            ''
-        ]
-        '''
+requestTypeChoices = (
+    ("intern", "intern"),
+    ("individual", "individual"),
+    ("multiple", "multiple"),
+)
+
+class RequestForm(forms.Form):
+    requestType = forms.CharField()
+    peopleInfo = forms.CharField(required=False)
+    requestInfo = forms.CharField()
+
+

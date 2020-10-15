@@ -28,15 +28,14 @@ class Instituicao(AbstractUser):
     #class Meta:
 
     def __str__(self):
-        return self.email
+        return self.instituicao
 
 
 class Produto(models.Model):
-
     tipoProduto = models.CharField(unique = True, max_length = 150)
     quantidadeMaxima = models.IntegerField()
-    tamanhosPossiveisAdulto = models.CharField(max_length = 300, default = '')
-    tamanhosPossiveisCriança = models.CharField(max_length = 300, default = '')
+    tamanhosPossiveisAdulto = models.CharField(max_length = 300, null=True, blank=True)
+    tamanhosPossiveisCriança = models.CharField(max_length = 300, null=True, blank=True)
     tamanhosPossiveis = models.CharField(max_length = 300, default = '', null=True, blank=True)
     #quantidadeDisponivel = models.IntegerField()
 
@@ -74,20 +73,25 @@ class RequestedProduct(models.Model):
     quantidade = models.IntegerField(default = 1)
 
     def __str__(self):
-        return self.produto + self.tamanho + self.quantidade
+        return str(self.produto) +"\tTAMANHO: "+ self.tamanho +"\tQUANTIDADE: "+ str(self.quantidade)
+
+class RequestedPerson(models.Model):
+    nomeBeneficiario = models.CharField(max_length = 100)
+    nomeTecnico = models.CharField(max_length = 100)
+    cartaoCidadao = models.IntegerField(unique = True)
+    telefone = models.IntegerField(unique = False)
+
+    def __str__(self):
+        return self.nomeBeneficiario + " - " + str(self.cartaoCidadao)
 
 class Pedido(models.Model):
     #produto = models.CharField(max_length = 3000, default = "")
     estadoPedido = models.CharField(max_length = 50, choices = estadoPedidos, default = "Recebido")
     tipoPedido = models.CharField(max_length = 50, choices = tiposPedidos, default = "Individual")
     equipa = models.ForeignKey(Instituicao, on_delete=models.CASCADE) # <-----------Aqui a instituicao sera aquela em q esta feito o login!!!!
-    nomeBeneficiario = models.CharField(max_length = 100)
-    nomeTecnico = models.CharField(max_length = 100)
-    cartaoCidadao = models.IntegerField(unique = True)
-    telefone = models.IntegerField(unique = True)
-    confirmacaoNovoPedido = models.BooleanField(unique = False)
-    elementosAgregado = models.CharField(max_length = 600, default = "nada") #queria fazer array mas n consigo, estou a pensar fazer uma string do genero "nomepessoa idade sexo, nomepessoa idade sexo, ...."
-    listProducts = models.ManyToManyField(RequestedProduct)
+    listProducts = models.ManyToManyField(RequestedProduct, related_name="products")
+    listPeople = models.ManyToManyField(RequestedPerson, related_name="people", blank=True)
+    createdAt = models.DateTimeField(auto_now_add=True)
 
     """
     sexo = models.CharField(max_length = 30)
@@ -96,5 +100,5 @@ class Pedido(models.Model):
     """
 
     def __str__(self):
-        return self.nomeBeneficiario
+        return self.estadoPedido + " - " + str(self.equipa)
 

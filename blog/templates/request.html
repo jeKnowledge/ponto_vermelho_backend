@@ -32,11 +32,7 @@
 				<a href="/" id="leave">Sair</a>
 
 				<div class="request">
-					<form
-						class="request-kind"
-						method="post"
-						action="clothing.html"
-					>
+					<form class="request-kind" method="post">
 						<div class="tab">
 							<div class="kind-container">
 								<h2>Tipo de Pedido:</h2>
@@ -80,52 +76,61 @@
 							</div>
 						</div>
 						<div class="tab">
-							<div class="id-container">
+							<div class="id-container" id="id-container">
 								<h2>Identificação do Beneficiário:</h2>
 
-								<div class="id-field">
-									<label for="name1"
-										>Nome do/a técnico/a de
-										referência:</label
-									>
-									<br />
-									<input
-										id="name1"
-										type="text"
-										name="name1"
-										required
-									/>
-								</div>
-
-								<div class="id-field">
-									<label for="name2"
-										>Nome do/a beneficiário/a
-										titular:</label
-									>
-									<br />
-									<input type="text" name="name2" required />
-								</div>
-
-								<div class="id-nums">
-									<div class="id-field num">
-										<label for="cc">Nº do CC:</label>
-										<br />
-										<input
-											type="number"
-											name="cc"
-											required
-										/>
-									</div>
-									<div class="id-field num">
-										<label for="phone"
-											>Nº de telefone:</label
+								<div class="person-div" id="person-div">
+									<div class="id-field">
+										<label for="name1"
+											>Nome do/a técnico/a de
+											referência:</label
 										>
 										<br />
 										<input
-											type="number"
-											name="phone"
+											id="name1"
+											type="text"
+											name="name1"
 											required
 										/>
+									</div>
+
+									<div class="id-field">
+										<label for="name2"
+											>Nome do/a beneficiário/a
+											titular:</label
+										>
+										<br />
+										<input
+											id="name2"
+											type="text"
+											name="name2"
+											required
+										/>
+									</div>
+
+									<div class="id-nums">
+										<div class="id-field num">
+											<label for="cc">Nº do CC:</label>
+											<br />
+											<input
+												id="cc"
+												type="number"
+												name="cc"
+												required
+											/>
+										</div>
+										<div class="id-field num">
+											<label for="phone"
+												>Nº de telefone:</label
+											>
+											<br />
+											<input
+												id="phone"
+												type="tel"
+												name="phone"
+												required
+											/>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -139,7 +144,7 @@
 							<a
 								class="plus-button"
 								id="plus-button"
-								onclick="addPedido()"
+								onclick="addPerson()"
 							>
 								<p>+</p>
 							</a>
@@ -200,7 +205,10 @@
 									</div>
 
 									<div class="clothing-line">
-										<div class="clothing-field" id="type-size-div">
+										<div
+											class="clothing-field"
+											id="type-size-div"
+										>
 											<label for="size"
 												>Tipo de Tamanho:</label
 											>
@@ -233,9 +241,15 @@
 							</div>
 						</div>
 					</form>
+
+					<form hidden class="hidden-form" method="POST">
+						{% csrf_token %} {{form.requestType}}
+						{{form.peopleInfo}} {{form.requestInfo}}
+					</form>
 				</div>
 			</section>
 		</main>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 		<script>
 			var back = document.getElementById("back");
 			var next = document.getElementById("next");
@@ -269,10 +283,18 @@
 				if (n == x.length - 1) {
 					document.getElementById("plus-button").style.display =
 						"block";
+					document.getElementById("plus-button").onclick = () =>
+						addPedido();
 				} else {
-					console.log("Asdassdasd");
-					document.getElementById("plus-button").style.display =
-						"none";
+					if (n == x.length - 2 && op2.checked) {
+						document.getElementById("plus-button").style.display =
+							"block";
+						document.getElementById("plus-button").onclick = () =>
+							addPerson();
+					} else {
+						document.getElementById("plus-button").style.display =
+							"none";
+					}
 				}
 			}
 
@@ -280,15 +302,26 @@
 				// This function will figure out which tab to display
 				var x = document.getElementsByClassName("tab");
 				// Exit the function if any field in the current tab is invalid:
-				if (n == 1 && !true) return false;
+				if (n == 1 && !validateForm()) return false;
 				// Hide the current tab:
 				x[currentTab].style.display = "none";
 				// Increase or decrease the current tab by 1:
-				currentTab = currentTab + n;
+				if (n === 1 && currentTab === 0 && op0.checked) {
+					currentTab = currentTab + 2;
+				} else if (n === -1 && currentTab === 2 && op0.checked) {
+					currentTab = currentTab - 2;
+				} else {
+					currentTab = currentTab + n;
+				}
 				// if you have reached the end of the form... :
 				if (currentTab >= x.length) {
-					//...the form gets submitted:
-					document.getElementById("regForm").submit();
+					submitFormHidden();
+					swal(
+						"Pedido Enviado!",
+						"O seu pedido irá ser processado.",
+						"success"
+					);
+					showTab(0);
 					return false;
 				}
 				// Otherwise, display the correct tab:
@@ -304,34 +337,127 @@
 				x = document.getElementsByClassName("tab");
 				y = x[currentTab].getElementsByTagName("input");
 				// A loop that checks every input field in the current tab:
-				for (i = 0; i < y.length; i++) {
-					// If a field is empty...
-					if (y[i].value == "") {
-						// add an "invalid" class to the field:
-						y[i].className += " invalid";
-						// and set the current valid status to false:
+				if (currentTab === 0) {
+					if (!op0.checked && !op1.checked && !op2.checked) {
 						valid = false;
+						swal("Por favor, selecione uma opção.");
 					}
 				}
-				// If the valid status is true, mark the step as finished and valid:
-				if (valid) {
-					document.getElementsByClassName("step")[
-						currentTab
-					].className += " finish";
+				if (currentTab === 1) {
+					for (i = 0; i < y.length; i++) {
+						if (y[i].value == "") {
+							valid = false;
+							swal("Por favor, preencha todos os campos.");
+						}
+					}
+					if (valid) {
+						for (i = 0; i < y.length; i++) {
+							if (y[i].name == "name1") {
+								var nameRegex = /^(?!-)[a-zA-Z- ]*[a-zA-Z]$/;
+								if (!y[i].value.match(nameRegex)) {
+									valid = false;
+									swal("Nome inválido.");
+								}
+							} else if (y[i].name == "name2") {
+								var nameRegex = /^(?!-)[a-zA-Z-]*[a-zA-Z]$/;
+								if (!y[i].value.match(nameRegex)) {
+									valid = false;
+									swal("Nome inválido.");
+								}
+							} else if (y[i].name == "cc") {
+								var ccRegex = /^[0-9]+$/;
+								if (!y[i].value.match(ccRegex)) {
+									valid = false;
+									swal(
+										"Número de cartão de cidadão inválido."
+									);
+								}
+							} else if (y[i].name == "phone") {
+								var phoneRegex = /^[0-9]{3}[ ]*[0-9]{3}[ ]*[0-9]{3}$/;
+								if (!y[i].value.match(phoneRegex)) {
+									valid = false;
+									swal("Número de telemóvel inválido.");
+								}
+							}
+							if (!valid) {
+								break;
+							}
+						}
+					}
 				}
-				return valid; // return the valid status
+				if (currentTab === 2) {
+					for (i = 0; i < y.length; i++) {
+						if (y[i].value == "") {
+							valid = false;
+							swal("Por favor, preencha todos os campos.");
+						}
+						if (!valid) {
+							break;
+						}
+					}
+				}
+				return valid;
 			}
 
 			function addPedido() {
+				var myJSONList = "{{productsJSON}}".replace(
+					/&(l|g|quo)t;/g,
+					function (a, b) {
+						return {
+							l: "<",
+							g: ">",
+							quo: '"',
+						}[b];
+					}
+				);
+
+				myData = JSON.parse(myJSONList);
+				const selected = myData[0];
+
 				numProdutos++;
 				const newNode = document
 					.getElementById("product-div")
 					.cloneNode(true);
 
+				var numProdutosCopy = numProdutos;
 				newNode.querySelector("#description").onchange = () =>
-					tipoProdutoChanged(numProdutos);
+					tipoProdutoChanged(numProdutosCopy);
 				newNode.querySelector("#type-size").onchange = () =>
-					typeSizeChanged(numProdutos);
+					typeSizeChanged(numProdutosCopy);
+				newNode.querySelector("#type-size-div").style.display = "block";
+
+				// RESET NA QUANTIDADE MAXIMA
+				let selectHTML = newNode.querySelector("#quantity");
+
+				let length = selectHTML.options.length;
+
+				for (i = length - 1; i >= 0; i--) {
+					selectHTML.options[i] = null;
+				}
+
+				for (var i = 1; i <= selected.fields.quantidadeMaxima; i++) {
+					var newOption = document.createElement("option");
+					newOption.text = i.toString();
+					newOption.value = i;
+					selectHTML.options.add(newOption);
+				}
+
+				// RESET NOS TAMANHOS
+				selectHTML = newNode.querySelector("#size");
+				length = selectHTML.options.length;
+
+				for (i = length - 1; i >= 0; i--) {
+					selectHTML.options[i] = null;
+				}
+
+				selected.fields.tamanhosPossiveisAdulto
+					.split(",")
+					.map((elem) => {
+						var newOption = document.createElement("option");
+						newOption.text = elem.replace(/^\s+|\s+$/g, "");
+						newOption.value = elem.replace(/^\s+|\s+$/g, "");
+						selectHTML.options.add(newOption);
+					});
 
 				document
 					.getElementById("clothing-container")
@@ -348,14 +474,14 @@
 						return {
 							l: "<",
 							g: ">",
-							quo: '"'
+							quo: '"',
 						}[b];
 					}
 				);
 
 				myData = JSON.parse(myJSONList);
 				const selected = myData.find(
-					elem => elem.fields.tipoProduto === tipoProduto
+					(elem) => elem.fields.tipoProduto === tipoProduto
 				);
 
 				var length = document
@@ -378,7 +504,7 @@
 				) {
 					selected.fields.tamanhosPossiveisAdulto
 						.split(",")
-						.map(elem => {
+						.map((elem) => {
 							var newOption = document.createElement("option");
 							newOption.text = elem.replace(/^\s+|\s+$/g, "");
 							newOption.value = elem.replace(/^\s+|\s+$/g, "");
@@ -391,7 +517,7 @@
 				) {
 					selected.fields.tamanhosPossiveisCriança
 						.split(",")
-						.map(elem => {
+						.map((elem) => {
 							var newOption = document.createElement("option");
 							newOption.text = elem.replace(/^\s+|\s+$/g, "");
 							newOption.value = elem.replace(/^\s+|\s+$/g, "");
@@ -401,6 +527,7 @@
 			}
 
 			function tipoProdutoChanged(num) {
+				console.log(num);
 				const tipoProduto = document
 					.querySelectorAll(".product-div")
 					[num].querySelector("#description").value;
@@ -410,14 +537,14 @@
 						return {
 							l: "<",
 							g: ">",
-							quo: '"'
+							quo: '"',
 						}[b];
 					}
 				);
 
 				myData = JSON.parse(myJSONList);
 				const selected = myData.find(
-					elem => elem.fields.tipoProduto === tipoProduto
+					(elem) => elem.fields.tipoProduto === tipoProduto
 				);
 
 				var length = document
@@ -425,7 +552,7 @@
 					[num].querySelector("#quantity").options.length;
 
 				//QUANTIDADE
-				const selectHTML = document
+				let selectHTML = document
 					.querySelectorAll(".product-div")
 					[num].querySelector("#quantity");
 
@@ -440,14 +567,168 @@
 					selectHTML.options.add(newOption);
 				}
 
-				console.log(selected.fields.tamanhosPossiveis)
+				// TODO: DELETE BUTTOn
+				// TODO: COLOCAR O ADMIN BONITO
+
+				//RESET TAMANHOS
+				selectHTML = document
+					.querySelectorAll(".product-div")
+					[num].querySelector("#size");
+				length = selectHTML.options.length;
+
+				for (i = length - 1; i >= 0; i--) {
+					selectHTML.options[i] = null;
+				}
 
 				if (selected.fields.tamanhosPossiveis) {
-					document.querySelectorAll(".product-div")[num].querySelector("#type-size-div").style.display = "none";
-				}else{
-
-					document.querySelectorAll(".product-div")[num].querySelector("#type-size-div").style.display = "block";
+					document
+						.querySelectorAll(".product-div")
+						[num].querySelector("#type-size-div").style.display =
+						"none";
+					selected.fields.tamanhosPossiveis.split(",").map((elem) => {
+						var newOption = document.createElement("option");
+						newOption.text = elem.replace(/^\s+|\s+$/g, "");
+						newOption.value = elem.replace(/^\s+|\s+$/g, "");
+						selectHTML.options.add(newOption);
+					});
+				} else {
+					document
+						.querySelectorAll(".product-div")
+						[num].querySelector("#type-size-div").style.display =
+						"block";
+					// OPTION IS THE DEFAULT
+					if (
+						document
+							.querySelectorAll(".product-div")
+							[num].querySelector("#type-size").value === "Adulto"
+					) {
+						selected.fields.tamanhosPossiveisAdulto
+							.split(",")
+							.map((elem) => {
+								var newOption = document.createElement(
+									"option"
+								);
+								newOption.text = elem.replace(/^\s+|\s+$/g, "");
+								newOption.value = elem.replace(
+									/^\s+|\s+$/g,
+									""
+								);
+								selectHTML.options.add(newOption);
+							});
+					} else if (
+						document
+							.querySelectorAll(".product-div")
+							[num].querySelector("#type-size").value ===
+						"Criança"
+					) {
+						selected.fields.tamanhosPossiveisCriança
+							.split(",")
+							.map((elem) => {
+								var newOption = document.createElement(
+									"option"
+								);
+								newOption.text = elem.replace(/^\s+|\s+$/g, "");
+								newOption.value = elem.replace(
+									/^\s+|\s+$/g,
+									""
+								);
+								selectHTML.options.add(newOption);
+							});
+					}
 				}
+			}
+
+			function submitFormHidden() {
+				finalForm = document.getElementsByClassName("hidden-form")[0];
+				inputs = finalForm.getElementsByTagName("input");
+
+				for (let i = 0; i < inputs.length; i++) {
+					if (inputs[i].name === "requestType") {
+						if (op0.checked) {
+							inputs[i].value = "intern";
+						} else if (op1.checked) {
+							inputs[i].value = "individual";
+						} else if (op2.checked) {
+							inputs[i].value = "multiple";
+						}
+					}
+					if (
+						(op1.checked || op2.checked) &&
+						inputs[i].name === "peopleInfo"
+					) {
+						let finalValue = "";
+						let people = document.getElementsByClassName(
+							"person-div"
+						);
+						console.log(people);
+						for (let k = 0; k < people.length; k++) {
+							const name1 = people[k].querySelector("#name1")
+								.value;
+							const name2 = people[k].querySelector("#name2")
+								.value;
+							const cc = people[k].querySelector("#cc").value;
+							const phone = people[k].querySelector("#phone")
+								.value;
+							if (k !== 0) {
+								finalValue += "/";
+							}
+							finalValue +=
+								name1 + "," + name2 + "," + cc + "," + phone;
+						}
+						// ADD REQUEST INFO
+						inputs[i].value = finalValue;
+						console.log(finalValue);
+					} else if (inputs[i].name === "requestInfo") {
+						let finalValue = "";
+						let products = document.getElementsByClassName(
+							"product-div"
+						);
+						for (let k = 0; k < products.length; k++) {
+							const description = products[k].querySelector(
+								"#description"
+							).value;
+							const quantity = products[k].querySelector(
+								"#quantity"
+							).value;
+							const typeSize =
+								products[k].querySelector("#type-size")
+									.parentElement.style.display === "none"
+									? ""
+									: products[k].querySelector("#type-size")
+											.value;
+							const productSize = products[k].querySelector(
+								"#size"
+							).value;
+							if (k !== 0) {
+								finalValue += "/";
+							}
+							finalValue +=
+								description +
+								"," +
+								quantity +
+								"," +
+								typeSize +
+								"," +
+								productSize;
+						}
+						// ADD REQUEST INFO
+						inputs[i].value = finalValue;
+					}
+				}
+				finalForm.submit();
+			}
+
+			function addPerson() {
+				const newNode = document
+					.getElementById("person-div")
+					.cloneNode(true);
+
+				const inputs = newNode.getElementsByTagName("input");
+				for (var i = 0; i < inputs.length; i++) {
+					inputs[i].value = null;
+				}
+
+				document.getElementById("id-container").appendChild(newNode);
 			}
 		</script>
 	</body>
