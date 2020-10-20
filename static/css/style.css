@@ -17,6 +17,7 @@
 	font-size: 16px;
 	color: #cd5e41;
 	border-radius: 10px;
+	padding-bottom: 0;
 }
 
 .log-in {
@@ -121,6 +122,23 @@ button {
 }
 .form-but button[type="button"]:hover {
 	background: #eeeeee;
+}
+@media screen and (max-width: 940px) {
+	.log-in {
+		max-width: 100%;
+	}
+	.log-in-form {
+		width: 55%;
+	}
+}
+@media screen and (max-width: 600px) {
+	.log-in {
+		max-width: 580px;
+	}
+	
+	.log-in-form {
+		width: 80%;
+	}
 }
 
 /*----------------------------ABOUT------------------------------*/

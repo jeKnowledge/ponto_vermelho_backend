@@ -3,19 +3,75 @@
 	padding: 0;
 	font-family: "Poppins", sans-serif;
 }
-
 #home {
 	position: fixed;
 	width: 100vw;
 	height: 100vh;
 	display: inline-block;
+	position: relative;
+}
+
+.action-icons {
+	position: absolute;
+	display: flex;
+	width: 7.5%;
+	z-index: 10;
+	left: 2.5%;
+	bottom: 2.5%;
+  }
+  .action-icons a {
+	padding: 9%;
+  }
+  .action-icons img {
+	max-width: 100%;
+	max-height: 100%;
+	width: auto;
+	height: auto;
+  }
+  .action-icons-mobile {
+	height: fit-content;
+	width: 18%;
+	left: 80%;
+	top: 1%;
+	z-index: 10;
+	display: none;
+}
+
+@media screen and (max-width: 940px) {
+	.action-icons-mobile {
+		display: flex;
+	}
+	.action-icons-desktop {
+		display: none;
+	}
 }
 
 /*----------------------------INTRO------------------------------*/
 .tab {
 	height: 100%;
 	display: none;
+	padding-right: 5%;
 }
+
+ .tab ::-webkit-scrollbar {
+	width: 10px;
+  }
+  
+  .tab ::-webkit-scrollbar-track {
+	border: 1px solid #014E82;
+	box-sizing: border-box;
+	border-radius: 100px;
+	margin-top: 100px;
+  }
+  
+  .tab ::-webkit-scrollbar-thumb {
+	background: #014E82;
+	border-radius: 100px;
+  }
+  
+  .tab ::-webkit-scrollbar-corner {
+	background-color: black;
+  }
 
 .intro {
 	background-color: #ffffff;
@@ -36,21 +92,7 @@
 	transform: translate(-50%, -50%);
 }
 
-#leave {
-	position: absolute;
-	z-index: 10;
-	bottom: 4%;
-	left: 2%;
-}
-
 /*----------------------------FORM------------------------------*/
-.plus-button {
-	background-color: #0181d3;
-	text-align: center;
-	color: white;
-	padding: 1%;
-	border-radius: 10px;
-}
 
 .product-div {
 	margin-bottom: 5%;
@@ -124,6 +166,12 @@ button:focus {
 	display: flex;
 	justify-content: space-between;
 }
+
+.clothing-line:nth-child(2){
+	padding-bottom: 8% ;
+	border-bottom: 3px solid rgba(1,78,130, 0.8);
+}
+
 .clothing-field {
 	display: block;
 	margin-top: 5%;
@@ -205,19 +253,16 @@ button:focus {
 }
 .request-but {
 	display: flex;
-	justify-content: space-between;
-	width: 100%;
-	position: absolute;
+	left:0;
+	right:0;
 	bottom: 10%;
+	margin: 0 auto;
+	position: absolute;
+	width: 73%;
+	justify-content: space-between;
 }
 .request-but a {
 	cursor: pointer;
-	margin: 0 15%;
-}
-.request-but button {
-	cursor: pointer;
-	background-color: transparent;
-	border-style: none;
 }
 .request-but #back {
 	cursor: default;
@@ -225,19 +270,29 @@ button:focus {
 .request-but a:hover {
 	opacity: 0.6;
 }
+.plus-button {
+	background-color: #0181d3;
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+}
+.plus-button p{
+	font-size: 1.5em;
+	text-align: center;
+	color: #fff;
+}
 @media screen and (max-width: 600px) {
 	.kind-container h2 {
 		font-size: 1.2em;
 	}
 	.kind-container label {
-		font-size: 12px;
+		font-size: 14px;
 	}
 }
 /*----------------------------ID------------------------------*/
 .id-container {
 	height: 55%;
 	padding: 10% 15%;
-	overflow: hidden;
 	overflow-y: scroll;
 }
 
@@ -275,31 +330,85 @@ button:focus {
 .id-nums {
 	display: flex;
 	justify-content: space-between;
+	padding-bottom: 15%;
+	border-bottom: 3px solid rgba(1,78,130, 0.8);
 }
 .num {
 	width: 40%;
 }
 @media screen and (max-width: 600px) {
+
+	.person-div{
+		width: 90%;
+	}
+	.id-container{
+		height: 65%;
+	}
 	.id-container h2 {
 		font-size: 1em;
 	}
 	.id-container label {
+		font-size: 14px;
+	}
+	.id-field {
+		margin-top: 5%;
+	}
+	.id-field:first-child {
+		margin-top: 15%;
+	}
+	.id-field input {
+		padding: 0;
 		font-size: 12px;
+	}
+	.id-nums {
+		display: block;
+	}
+	.num {
+		width: 100%;
 	}
 }
 
 /*----------------------------QUERIES------------------------------*/
 @media screen and (max-width: 940px) {
 	.request {
-		max-width: 100%;
-		margin-left: 0;
+	  max-width: 100%;
+	  margin-left: 0;
 	}
+  
 	.form-check {
-		margin-top: 25%;
+	  margin-top: 25%;
 	}
+  
 	.intro {
-		display: none;
+	  display: none;
 	}
-}
-@media screen and (max-width: 600px) {
-}
+  }
+  
+  @media screen and (max-width: 600px) {
+	.tab {
+		width: 108%;
+	}
+	.clothing-container {
+		height: 60%;
+	}
+	.clothing-container label {
+		font-size: 14px;
+	}
+	.clothing-field{
+		width: 94%;
+	}
+	.clothing-field select[name="description"] {
+		width: 100%;
+	}
+  .clothing-line{
+		display: block;
+		  
+	  }
+	  .clothing-line:nth-child(2){
+		padding-bottom: 12%;
+	}
+	.clothing-line:nth-child(1){
+		padding-top: 8%;
+	}
+  }
+  

@@ -22,14 +22,20 @@
 	<body>
 		<main>
 			<section id="home">
-				<div class="intro">
-					<a href="/"
-						><img src="{% static "./img/logo.png"%}"
-						alt="logo-ponto-vermelho"></a
-					>
+
+				<div class="action-icons action-icons-desktop">
+					<a href="/profile"><img src="{% static "./img/profileb.png"%}" alt="profile-icon" title="Área Pessoal"></a>
+					<a href="/signout"><img src="{% static "img/logoutb.png" %}" alt="leave-icon" title="Sair"></a>
+				</div>
+				<div class="action-icons action-icons-mobile">
+					<a href="/profile"><img src="{% static "./img/profile.png"%}" alt="profile-icon" title="Área Pessoal"></a>
+					<a href="/signout"><img src="{% static "./img/logout.png"%}" alt="leave-icon" title="Sair"></a>
 				</div>
 
-				<a href="/" id="leave">Sair</a>
+				<div class="intro">
+					<a href="/"><img src="{% static "./img/logo.png"%}" alt="logo-ponto-vermelho"></a>
+				</div>
+
 
 				<div class="request">
 					<form class="request-kind" method="post">
@@ -136,17 +142,19 @@
 							</div>
 						</div>
 
+
 						<div class="request-but">
 							<a id="back" onclick="nextPrev(-1)">
 								<img src="{% static "./img/back.svg"%}"
 								alt="back-arrow" />
 							</a>
+
 							<a
 								class="plus-button"
 								id="plus-button"
 								onclick="addPerson()"
 							>
-								<p>+</p>
+							<p>+</p>
 							</a>
 							<a id="next" onclick="nextPrev(1)">
 								<img src="{% static "./img/next.svg"%}"
@@ -727,7 +735,6 @@
 				for (var i = 0; i < inputs.length; i++) {
 					inputs[i].value = null;
 				}
-
 				document.getElementById("id-container").appendChild(newNode);
 			}
 		</script>
