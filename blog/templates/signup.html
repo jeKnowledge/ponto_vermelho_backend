@@ -66,15 +66,17 @@
 									{{form.publicoAlvo}}
 								</div>
 
-								<div class="form-field">
-									<label for="public-kind">Outro:</label>
-									<br />
-									<input
-										type="name"
-										name="public-kind"
-										required
-									/>
-								</div>
+								{% if form.publicoAlvo == Outros %}
+									<div class="form-field">
+										<label for="public-kind">Outro:</label>
+										<br />
+										<input
+											type="name"
+											name="public-kind"
+											required
+										/>
+									</div>
+								{% endif %}
 							</div>
 
 							<div class="form-line">

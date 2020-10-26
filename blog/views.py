@@ -42,7 +42,8 @@ class Register(View):
     def get(self, request):
         if request.user.is_authenticated:
             return redirect("request")
-        messages.warning(request, 'Erro no Registo')
+        #messages.warning(request, 'Erro no Registo')
+        #print("publico alvo", publico_alvo)
         form = SignUpForm()
         return render(request, 'signup.html',{"form":form})
 
@@ -88,7 +89,7 @@ def request_view(request):
                 #NEED TO ADD PEOPLE
                 peopleInfo = formData["peopleInfo"].split("/")
                 if(formData["requestType"] == "individual" and len(peopleInfo) != 1):
-                    print("ERRO QUANTAS EPSSOAS")
+                    print("ERRO QUANTAS PESSOAS")
                     return
                 # ERRO
 
@@ -119,6 +120,10 @@ def request_view(request):
                 productSize = productData[3]
 
                 productQuery= Produto.objects.get(tipoProduto=productName)
+                print("!!!!!!!!!!!!!!!!!!", productData)
+                print("-----", productQuery.tamanhosPossiveis, "-----")
+                print("++++++++", productSize, "+++++++++")
+                print("----------------", typeSize, "---------------")
 
                 if(quantity > productQuery.quantidadeMaxima):
                     #erro
@@ -131,7 +136,7 @@ def request_view(request):
                         # ERRO
                         print("ERRO TAMANHO POSSIVEl")
                         return
-# TUDO PERFEITO
+# TUDO PERFEITO     
                     newProductRequested = RequestedProduct(produto=productQuery, tamanho=productSize,quantidade=quantity)
                     productObjects.append(newProductRequested)
                 else:
@@ -148,7 +153,7 @@ def request_view(request):
                     else:
                         print("ERRO TAMANHOS TIPO")
                         return
-                        return
+                        #return
 
                     # CHEGOU AQUI PEDIDO VALIDO
                     for obj in productObjects:
@@ -187,7 +192,9 @@ def request_view(request):
 
         else:
             print(form.errors)
-    return render(request, "request.html",{"products": query, "productsJSON":query_json, "form": form})
+    print(query[0].tamanhosPossiveisAdulto, "***********************")
+    print(range(query[0].quantidadeMaxima + 1))
+    return render(request, "request.html",{"products": query, "productsJSON":query_json, "form": form, "tamanhos": query[0].tamanhosPossiveisAdulto.split(","), "range": range(1, query[0].quantidadeMaxima + 1)})
 
 @login_required
 def personal_view(request):

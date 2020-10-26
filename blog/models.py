@@ -25,7 +25,9 @@ class Instituicao(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'instituicao', 'publicoAlvo', 'areaGeografica', 'telefone']
 
-    #class Meta:
+    class Meta:
+        verbose_name = "Equipa"
+        verbose_name_plural = "Equipas"
 
     def __str__(self):
         return self.instituicao
@@ -73,7 +75,7 @@ class RequestedProduct(models.Model):
     quantidade = models.IntegerField(default = 1)
 
     def __str__(self):
-        return str(self.produto) +"\tTAMANHO: "+ self.tamanho +"\tQUANTIDADE: "+ str(self.quantidade)
+        return "\n\n" + str(self.produto) +"\n- TAMANHO: "+ self.tamanho +"\n- QUANTIDADE: "+ str(self.quantidade)
 
 class RequestedPerson(models.Model):
     nomeBeneficiario = models.CharField(max_length = 100)
@@ -82,7 +84,7 @@ class RequestedPerson(models.Model):
     telefone = models.IntegerField(unique = False)
 
     def __str__(self):
-        return self.nomeBeneficiario + " - " + str(self.cartaoCidadao)
+        return "\n" + self.nomeBeneficiario + " - " + str(self.cartaoCidadao)
 
 class Pedido(models.Model):
     #produto = models.CharField(max_length = 3000, default = "")

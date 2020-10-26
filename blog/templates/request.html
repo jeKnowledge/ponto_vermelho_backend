@@ -186,7 +186,6 @@
 												onchange="tipoProdutoChanged(0)"
 											>
 												{% for product in products %}
-
 												<option
 													value="{{product.tipoProduto}}"
 													>{{product.tipoProduto}}</option
@@ -204,10 +203,9 @@
 												name="quantity"
 												id="quantity"
 											>
-												<option value="1">1</option>
-												<option value="2">2</option>
-												<option value="3">2</option>
-												<option value="4">3</option>
+											{% for quantity in range %}
+												<option value="{{quantity}}">{{quantity}}</option>
+											{% endfor %}
 											</select>
 										</div>
 									</div>
@@ -238,10 +236,9 @@
 											<label for="size">Tamanho:</label>
 											<br />
 											<select name="size" id="size">
-												<option value="35">35</option>
-												<option value="36">36</option>
-												<option value="37">37</option>
-												<option value="38">38</option>
+												{% for size in tamanhos %}
+													<option value="{{size}}">{{size}}</option>
+												{% endfor %}
 											</select>
 										</div>
 									</div>
@@ -259,6 +256,8 @@
 		</main>
 		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 		<script>
+			var product
+
 			var back = document.getElementById("back");
 			var next = document.getElementById("next");
 			var sub = document.getElementById("sub");
