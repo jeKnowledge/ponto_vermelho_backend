@@ -15,9 +15,9 @@ class Instituicao(AbstractUser):
     #class Publico(models.TextChoices): <----- isto seria para usar se metesse o choices mas ainda estou a ver o que utilizar
 
     #nomeEquipa = models.CharField(max_length = 100, unique = True) <-------- username
-    instituicao = models.CharField(max_length = 100)
-    publicoAlvo = models.CharField(choices=publico_alvo,max_length = 100, default = "população sem abrigo")
-    areaGeografica = models.CharField(max_length = 300)
+    instituicao = models.CharField(max_length = 100, verbose_name = "Instituição")
+    publicoAlvo = models.CharField(choices=publico_alvo, max_length = 100, default = "população sem abrigo", verbose_name = "Publico Alvo")
+    areaGeografica = models.CharField(max_length = 300, verbose_name = "Área Geográfica")
     telefone = models.IntegerField(unique = True)
     email = models.EmailField(max_length = 300, unique = True)
     aceite = models.BooleanField(default = False) #campo para ser aceite pelo admin para poder utilziar a conta
@@ -34,11 +34,11 @@ class Instituicao(AbstractUser):
 
 
 class Produto(models.Model):
-    tipoProduto = models.CharField(unique = True, max_length = 150)
-    quantidadeMaxima = models.IntegerField()
-    tamanhosPossiveisAdulto = models.CharField(max_length = 300, null=True, blank=True)
-    tamanhosPossiveisCriança = models.CharField(max_length = 300, null=True, blank=True)
-    tamanhosPossiveis = models.CharField(max_length = 300, default = '', null=True, blank=True)
+    tipoProduto = models.CharField(unique = True, max_length = 150, verbose_name = "Tipo de Produto")
+    quantidadeMaxima = models.IntegerField(verbose_name = "Quantidade Maxima")
+    tamanhosPossiveisAdulto = models.CharField(max_length = 300, null=True, blank=True, verbose_name = "Tamanhos Adulto")
+    tamanhosPossiveisCriança = models.CharField(max_length = 300, null=True, blank=True, verbose_name = "Tamanhos Criança")
+    tamanhosPossiveis = models.CharField(max_length = 300, default = '', null=True, blank=True, verbose_name = "Tamanhos(não roupa)")
     #quantidadeDisponivel = models.IntegerField()
 
     def __str__(self):
@@ -88,12 +88,13 @@ class RequestedPerson(models.Model):
 
 class Pedido(models.Model):
     #produto = models.CharField(max_length = 3000, default = "")
-    estadoPedido = models.CharField(max_length = 50, choices = estadoPedidos, default = "Recebido")
-    tipoPedido = models.CharField(max_length = 50, choices = tiposPedidos, default = "Individual")
+    estadoPedido = models.CharField(max_length = 50, choices = estadoPedidos, default = "Recebido", verbose_name = "Estado do Pedido")
+    tipoPedido = models.CharField(max_length = 50, choices = tiposPedidos, default = "Individual", verbose_name = "Tipo de Pedido")
     equipa = models.ForeignKey(Instituicao, on_delete=models.CASCADE) # <-----------Aqui a instituicao sera aquela em q esta feito o login!!!!
-    listProducts = models.ManyToManyField(RequestedProduct, related_name="products")
-    listPeople = models.ManyToManyField(RequestedPerson, related_name="people", blank=True)
+    listProducts = models.ManyToManyField(RequestedProduct, related_name="products", verbose_name = "Lista de Produtos")
+    listPeople = models.ManyToManyField(RequestedPerson, related_name="people", blank=True, verbose_name = "Lista de Pessoas")
     createdAt = models.DateTimeField(auto_now_add=True)
+    #numeroElementosAgregado = models.IntegerField(default = 1) #  <------- ADICIONEI AGR! UMA DAS ALTERAÇOES NECESSARIAS
 
     """
     sexo = models.CharField(max_length = 30)

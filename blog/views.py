@@ -19,7 +19,7 @@ class Login(View):
     def get(self, request):
         print(request.user.is_authenticated)
         if request.user.is_authenticated:
-            return redirect("request")
+            return redirect("personal") #---------------- AQUI ALTEREI PARA PERSONAL! ERA REQUEST
         form =LoginForm()
         return render(request, "login.html",{"form":form})
 
@@ -32,7 +32,7 @@ class Login(View):
             user = authenticate(request, username = email, password = password)
             if user is not None:
                 login(request, user)
-                return redirect('request')
+                return redirect('personal') #---------------- AQUI ALTEREI PARA PERSONAL! ERA REQUEST
             else:
                 messages.warning(request, 'Email ou Password Invalida')
                 return redirect('login')
@@ -41,10 +41,12 @@ class Login(View):
 class Register(View):
     def get(self, request):
         if request.user.is_authenticated:
-            return redirect("request")
+            return redirect("personal") #---------------- AQUI ALTEREI PARA PERSONAL! ERA REQUEST
         #messages.warning(request, 'Erro no Registo')
         #print("publico alvo", publico_alvo)
         form = SignUpForm()
+        print("ola")
+        print(form)
         return render(request, 'signup.html',{"form":form})
 
     def post(self, request):
@@ -120,10 +122,6 @@ def request_view(request):
                 productSize = productData[3]
 
                 productQuery= Produto.objects.get(tipoProduto=productName)
-                print("!!!!!!!!!!!!!!!!!!", productData)
-                print("-----", productQuery.tamanhosPossiveis, "-----")
-                print("++++++++", productSize, "+++++++++")
-                print("----------------", typeSize, "---------------")
 
                 if(quantity > productQuery.quantidadeMaxima):
                     #erro
@@ -194,6 +192,7 @@ def request_view(request):
             print(form.errors)
     print(query[0].tamanhosPossiveisAdulto, "***********************")
     print(range(query[0].quantidadeMaxima + 1))
+    print(query);
     return render(request, "request.html",{"products": query, "productsJSON":query_json, "form": form, "tamanhos": query[0].tamanhosPossiveisAdulto.split(","), "range": range(1, query[0].quantidadeMaxima + 1)})
 
 @login_required

@@ -17,14 +17,12 @@
     <section id="home">
 
       <div class="request-icons">
-        <!--<a href="/request"><img src="{% static "img/shop.png" %}" alt="leave-icon" title="Sair"></a>-->
-        
         {% if user.aceite == True %}
           <a href="/request"><img src="{% static "img/shop.png" %}" alt="leave-icon" title="Sair"></a>
         {% else %}
-          <a><img src="{% static "img/shop.png" %}" alt="leave-icon" title="Sair"></a>
+          <a href=""><img src="{% static "img/shop.png" %}" alt="leave-icon" title="Sair" onclick="CheckAccepted()"></a>
+          <!--<a><img src="{% static "img/shop.png" %}" alt="leave-icon" title="Sair" onclick="CheckAccepted(0)"></a>-->
         {% endif %}
-
         <a href="/signout"><img src="{% static "img/logout.png" %}" alt="leave-icon" title="Sair"></a>
       </div>
 
@@ -85,6 +83,11 @@
     </section>
 
   </main>
+  <script>
+    function CheckAccepted(){
+        swal("É necessário ser aceite pela administração antes de poder fazer pedidos.");
+    }
+  </script>
 </body>
 
 </html>

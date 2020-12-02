@@ -63,20 +63,29 @@
 								<div class="form-field public">
 									<label for="public">Público-alvo:</label>
 									<br />
-									{{form.publicoAlvo}}
+									<select name="publico" id="publico" onchange="checkOthers(this.value)">
+										{% for publico in form.publicoAlvo %}
+											<option value="{{publico}}">{{publico}}</option>
+										{% endfor %}
+									</select>
+									<!--{{form.publicoAlvo}}-->
+								</div>
+								<br />
+								<div class="form-field public">
+									<input type="text" name="public-kind" id="others" style='display: none;'/>
 								</div>
 
-								{% if form.publicoAlvo == Outros %}
+								<!--{% if form.publicoAlvo == Outros %}
 									<div class="form-field">
 										<label for="public-kind">Outro:</label>
 										<br />
 										<input
-											type="name"
+											type="text"
 											name="public-kind"
 											required
 										/>
 									</div>
-								{% endif %}
+								{% endif %}-->
 							</div>
 
 							<div class="form-line">
@@ -127,5 +136,16 @@
 				</div>
 			</section>
 		</main>
+		<script type="text/javascript">
+			function checkOthers(val){
+				var element = document.getElementById("others");
+				if(val == "Outros"){
+					element.style.display = 'block';
+				}
+				else{
+					element.style.display = 'none';
+				}
+			}
+		</script>
 	</body>
 </html>

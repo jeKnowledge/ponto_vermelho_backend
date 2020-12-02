@@ -7,7 +7,8 @@ admin.site.site_title = "Página de Administrador"
 admin.site.index_title = "Página de Administrador"
 
 class AdminPedido(admin.ModelAdmin):
-    list_display = ["equipa", "estadoPedido", "createdAt"]
+    list_display = ["equipa", "tipoPedido","estadoPedido", "createdAt"]
+    readonly_fields = ['tipoPedido', 'equipa', 'listProducts', 'listPeople']
 
     def change_view(self, request, object_id, form_url='', extra_context=None):
         self.object_id = object_id
@@ -27,8 +28,10 @@ class AdminPedido(admin.ModelAdmin):
     def has_delete_permission(self, request, obj=None):
         return False
 
+'''
     def has_change_permission(self, request, obj=None):
         return False
+'''
 
 class AdminProduto(admin.ModelAdmin):
     list_display = ["tipoProduto"]
@@ -39,6 +42,8 @@ class AdminProduto(admin.ModelAdmin):
 class AdminUser(admin.ModelAdmin):
     list_display = ["instituicao", "email", "aceite"]
     actions = ['acceptance', 'unacceptance']
+    empty_value_display = ''
+    exclude = ('last_login','is_superuser','date_joined','is_active','is_staff','groups','user_permissions','password','first_name','last_name')
 
     def acceptance(self, request, queryset):
         queryset.update(aceite = True)
