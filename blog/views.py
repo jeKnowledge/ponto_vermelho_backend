@@ -203,7 +203,7 @@ def request_view(request):
 
 @login_required
 def personal_view(request):
-    query = Pedido.objects.filter(equipa=request.user)
+    query = Pedido.objects.filter(equipa=request.user).order_by("-createdAt")
     return render(request, "personal.html", {"user": request.user, "requests": query})
 
 def personId(request):

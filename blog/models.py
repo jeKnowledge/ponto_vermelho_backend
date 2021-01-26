@@ -14,7 +14,7 @@ publico_alvo = [
 
 class Instituicao(AbstractUser):
     #class Publico(models.TextChoices): <----- isto seria para usar se metesse o choices mas ainda estou a ver o que utilizar
-
+    username = models.CharField(max_length=100, verbose_name="Nome Equipa")
     #nomeEquipa = models.CharField(max_length = 100, unique = True) <-------- username
     instituicao = models.CharField(max_length = 100, verbose_name = "Instituição")
     publicoAlvo = models.CharField(max_length = 100, default = "população sem abrigo", verbose_name = "Publico Alvo")
@@ -31,7 +31,7 @@ class Instituicao(AbstractUser):
         verbose_name_plural = "Equipas"
 
     def __str__(self):
-        return self.instituicao
+        return self.username
 
 
 class Produto(models.Model):
@@ -39,7 +39,7 @@ class Produto(models.Model):
     quantidadeMaxima = models.IntegerField(verbose_name = "Quantidade Maxima")
     tamanhosPossiveisAdulto = models.CharField(max_length = 300, null=True, blank=True, verbose_name = "Tamanhos Adulto")
     tamanhosPossiveisCriança = models.CharField(max_length = 300, null=True, blank=True, verbose_name = "Tamanhos Criança")
-    tamanhosPossiveis = models.CharField(max_length = 300, default = '', null=True, blank=True, verbose_name = "Tamanhos(não roupa)")
+    tamanhosPossiveis = models.CharField(max_length = 300, default = '', null=True, blank=True, verbose_name = "Tamanhos (Sem ser Roupa)")
     #quantidadeDisponivel = models.IntegerField()
 
     def __str__(self):
@@ -88,21 +88,13 @@ class RequestedPerson(models.Model):
         return "\n" + self.nomeBeneficiario + " - " + str(self.cartaoCidadao)
 
 class Pedido(models.Model):
-    #produto = models.CharField(max_length = 3000, default = "")
     numPeople = models.IntegerField(default = 1, verbose_name="Número de Pessoas")
     estadoPedido = models.CharField(max_length = 50, choices = estadoPedidos, default = "Recebido", verbose_name = "Estado do Pedido")
     tipoPedido = models.CharField(max_length = 50, choices = tiposPedidos, default = "Individual", verbose_name = "Tipo de Pedido")
     equipa = models.ForeignKey(Instituicao, on_delete=models.CASCADE) # <-----------Aqui a instituicao sera aquela em q esta feito o login!!!!
     listProducts = models.ManyToManyField(RequestedProduct, related_name="products", verbose_name = "Lista de Produtos")
     listPeople = models.ManyToManyField(RequestedPerson, related_name="people", blank=True, verbose_name = "Lista de Pessoas")
-    createdAt = models.DateTimeField(auto_now_add=True)
-    #numeroElementosAgregado = models.IntegerField(default = 1) #  <------- ADICIONEI AGR! UMA DAS ALTERAÇOES NECESSARIAS
-
-    """
-    sexo = models.CharField(max_length = 30)
-    idade = models.IntegerField()
-    numeroElementosAgregado = models.CharField(max_length = 2, choices = numeroElementos, default = '0')
-    """
+    createdAt = models.DateTimeField(auto_now_add=True, verbose_name="Data de Pedido")
 
     def __str__(self):
         return self.estadoPedido + " - " + str(self.equipa)

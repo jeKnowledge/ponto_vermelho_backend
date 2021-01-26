@@ -56,11 +56,11 @@
             {% for request in requests %}
             <div class="request">
               <div class="request-info">
-                <button class="accordion">{{request.createdAt}}</button>
+                <button class="accordion">{{request.createdAt|date:"d/m/Y - H:i"}}h</button>
                 <div class="panel">
                   <ul>
                     {% for item in request.listProducts.all %}
-                    <li>{{item.produto}} ({{item.quantidade}})</li>
+                    <li>{{item.produto}} ( {{item.quantidade}} ) / {{item.tamanho}}</li>
                     {% endfor %}
                   </ul>
                 </div>
