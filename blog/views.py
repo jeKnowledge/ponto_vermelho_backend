@@ -45,16 +45,18 @@ class Register(View):
         #messages.warning(request, 'Erro no Registo')
         #print("publico alvo", publico_alvo)
         form = SignUpForm()
-        print("ola")
-        print(form)
         return render(request, 'signup.html',{"form":form})
 
     def post(self, request):
         form = SignUpForm(request.POST)
         if form.is_valid():
-            form.save()
+            instance = form.save(commit=False)
             user = form.cleaned_data.get('username')
             email = form.cleaned_data.get('email')
+            if(instance.publicoAlvo == "Outros"):
+
+                instance.publicoAlvo = request.POST.get('publicKind')
+            instance.save()
             '''   REVER COMO O ENVIO DE EMAIL FUNCIONA QUE ESTA A DAR ERRO
             send_mail(
                 'Pedido de Registo',
@@ -66,9 +68,8 @@ class Register(View):
             return redirect('login')
             #return HttpResponseRedirect(reverse('blog: login'))
         else:
-            print(form.errors)
-            messages.warning(request, 'Erro no Registo')
-            return redirect('signup')
+            messages.error(request, 'Erro no Registo')
+            return redirect('signup',{"form":form})
         #return HttpResponse('Pagina de Registo para a instituição')
 
 
@@ -77,6 +78,11 @@ def request_view(request):
     query = Produto.objects.all()
     query_json = serializers.serialize("json",query)
     formData = {}
+
+    if not request.user.aceite:
+        messages.error(request, 'Não autorizado')
+        return redirect("personal")
+
 
     form = RequestForm()
     if request.method == 'POST':

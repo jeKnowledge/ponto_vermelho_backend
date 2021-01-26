@@ -1,12 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.utils.html import format_html
 
 
 publico_alvo = [
     ["População sem abrigo", "População sem abrigo"],
     ["Beneficiários do Rendimento Social de Inserção", "Beneficiários do Rendimento Social de Inserção"],
-    ["Grávidas em situação de risco", "Grávidas em situação de risco"],
-    ["Vítimas de violência doméstica", "Vítimas de violência doméstica"],
+    ["", "Grávidas em situação de risco"],
+    ["", ""],
     ["Outros", "Outros"]
 ]
 
@@ -16,7 +17,7 @@ class Instituicao(AbstractUser):
 
     #nomeEquipa = models.CharField(max_length = 100, unique = True) <-------- username
     instituicao = models.CharField(max_length = 100, verbose_name = "Instituição")
-    publicoAlvo = models.CharField(choices=publico_alvo, max_length = 100, default = "população sem abrigo", verbose_name = "Publico Alvo")
+    publicoAlvo = models.CharField(max_length = 100, default = "população sem abrigo", verbose_name = "Publico Alvo")
     areaGeografica = models.CharField(max_length = 300, verbose_name = "Área Geográfica")
     telefone = models.IntegerField(unique = True)
     email = models.EmailField(max_length = 300, unique = True)
@@ -75,7 +76,7 @@ class RequestedProduct(models.Model):
     quantidade = models.IntegerField(default = 1)
 
     def __str__(self):
-        return "\n\n" + str(self.produto) +"\n- TAMANHO: "+ self.tamanho +"\n- QUANTIDADE: "+ str(self.quantidade)
+        return "\n\n" + str(self.produto) +"\n- Tamanho: "+ self.tamanho +"\n    - Quantidade: "+ str(self.quantidade)
 
 class RequestedPerson(models.Model):
     nomeBeneficiario = models.CharField(max_length = 100)
@@ -88,6 +89,7 @@ class RequestedPerson(models.Model):
 
 class Pedido(models.Model):
     #produto = models.CharField(max_length = 3000, default = "")
+    numPeople = models.IntegerField(default = 1, verbose_name="Número de Pessoas")
     estadoPedido = models.CharField(max_length = 50, choices = estadoPedidos, default = "Recebido", verbose_name = "Estado do Pedido")
     tipoPedido = models.CharField(max_length = 50, choices = tiposPedidos, default = "Individual", verbose_name = "Tipo de Pedido")
     equipa = models.ForeignKey(Instituicao, on_delete=models.CASCADE) # <-----------Aqui a instituicao sera aquela em q esta feito o login!!!!

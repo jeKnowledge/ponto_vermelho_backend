@@ -21,7 +21,7 @@ class SignUpForm(UserCreationForm):
         'telefone',
         'email',
         'password1',
-        "password2"
+        "password2",
         ]
 
 
@@ -40,5 +40,6 @@ class RequestForm(forms.Form):
     requestType = forms.CharField()
     peopleInfo = forms.CharField(required=False)
     requestInfo = forms.CharField()
+    numPeople = forms.IntegerField(max_value = 8)
 
 

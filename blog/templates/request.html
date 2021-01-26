@@ -22,20 +22,33 @@
 	<body>
 		<main>
 			<section id="home">
-
 				<div class="action-icons action-icons-desktop">
-					<a href="/profile"><img src="{% static "./img/profileb.png"%}" alt="profile-icon" title="Área Pessoal"></a>
-					<a href="/signout"><img src="{% static "img/logoutb.png" %}" alt="leave-icon" title="Sair"></a>
+					<a href="/profile"
+						><img src="{% static "./img/profileb.png"%}"
+						alt="profile-icon" title="Área Pessoal"></a
+					>
+					<a href="/signout"
+						><img src="{% static "img/logoutb.png" %}"
+						alt="leave-icon" title="Sair"></a
+					>
 				</div>
 				<div class="action-icons action-icons-mobile">
-					<a href="/profile"><img src="{% static "./img/profile.png"%}" alt="profile-icon" title="Área Pessoal"></a>
-					<a href="/signout"><img src="{% static "./img/logout.png"%}" alt="leave-icon" title="Sair"></a>
+					<a href="/profile"
+						><img src="{% static "./img/profile.png"%}"
+						alt="profile-icon" title="Área Pessoal"></a
+					>
+					<a href="/signout"
+						><img src="{% static "./img/logout.png"%}"
+						alt="leave-icon" title="Sair"></a
+					>
 				</div>
 
 				<div class="intro">
-					<a href="/"><img src="{% static "./img/logo.png"%}" alt="logo-ponto-vermelho"></a>
+					<a href="/"
+						><img src="{% static "./img/logo.png"%}"
+						alt="logo-ponto-vermelho"></a
+					>
 				</div>
-
 
 				<div class="request">
 					<form class="request-kind" method="post">
@@ -51,32 +64,39 @@
 											name="check"
 											value="0"
 											id="op0"
+											onchange="checkAgregado(this.value)"
 										/>
 										<span class="checkmark"></span>
 									</label>
 									<br />
 									<br />
 									<label class="container"
-										>Individual
+										>Beneficiários
 										<input
 											type="radio"
 											name="check"
 											value="1"
 											id="op1"
+											onchange="checkAgregado(this.value)"
 										/>
 										<span class="checkmark"></span>
 									</label>
-									<br />
-									<br />
-									<label class="container"
-										>Agregado
-										<input
-											type="radio"
-											name="check"
-											value="2"
-											id="op2"
-										/>
-										<span class="checkmark"></span>
+									<label
+										style="display: none;"
+										class="container"
+										id="numPeople"
+										>Número de Pessoas
+										<select
+											name="numPeople"
+											id="numPeopleField"
+										>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+											<option value="6">6</option>
+										</select>
 									</label>
 								</div>
 							</div>
@@ -142,7 +162,6 @@
 							</div>
 						</div>
 
-
 						<div class="request-but">
 							<a id="back" onclick="nextPrev(-1)">
 								<img src="{% static "./img/back.svg"%}"
@@ -154,7 +173,7 @@
 								id="plus-button"
 								onclick="addPerson()"
 							>
-							<p>+</p>
+								<p>+</p>
 							</a>
 							<a id="next" onclick="nextPrev(1)">
 								<img src="{% static "./img/next.svg"%}"
@@ -203,9 +222,11 @@
 												name="quantity"
 												id="quantity"
 											>
-											{% for quantity in range %}
-												<option value="{{quantity}}">{{quantity}}</option>
-											{% endfor %}
+												{% for quantity in range %}
+												<option value="{{quantity}}"
+													>{{quantity}}</option
+												>
+												{% endfor %}
 											</select>
 										</div>
 									</div>
@@ -237,7 +258,9 @@
 											<br />
 											<select name="size" id="size">
 												{% for size in tamanhos %}
-													<option value="{{size}}">{{size}}</option>
+												<option value="{{size}}"
+													>{{size}}</option
+												>
 												{% endfor %}
 											</select>
 										</div>
@@ -250,13 +273,14 @@
 					<form hidden class="hidden-form" method="POST">
 						{% csrf_token %} {{form.requestType}}
 						{{form.peopleInfo}} {{form.requestInfo}}
+						{{form.numPeople}}
 					</form>
 				</div>
 			</section>
 		</main>
 		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 		<script>
-			var product
+			var product;
 
 			var back = document.getElementById("back");
 			var next = document.getElementById("next");
@@ -264,7 +288,6 @@
 
 			var op0 = document.getElementById("op0");
 			var op1 = document.getElementById("op1");
-			var op2 = document.getElementById("op2");
 
 			var inputs = document.getElementsByTagName("input");
 
@@ -345,7 +368,7 @@
 				y = x[currentTab].getElementsByTagName("input");
 				// A loop that checks every input field in the current tab:
 				if (currentTab === 0) {
-					if (!op0.checked && !op1.checked && !op2.checked) {
+					if (!op0.checked && !op1.checked) {
 						valid = false;
 						swal("Por favor, selecione uma opção.");
 					}
@@ -655,19 +678,23 @@
 							inputs[i].value = "intern";
 						} else if (op1.checked) {
 							inputs[i].value = "individual";
-						} else if (op2.checked) {
-							inputs[i].value = "multiple";
 						}
 					}
-					if (
-						(op1.checked || op2.checked) &&
-						inputs[i].name === "peopleInfo"
-					) {
+					if (inputs[i].name === "numPeople") {
+						let numPeople = document.getElementById(
+							"numPeopleField"
+						);
+						if (op0.checked) {
+							inputs[i].value = numPeople.value;
+						} else if (op1.checked) {
+							inputs[i].value = numPeople.value;
+						}
+					}
+					if (op1.checked && inputs[i].name === "peopleInfo") {
 						let finalValue = "";
 						let people = document.getElementsByClassName(
 							"person-div"
 						);
-						console.log(people);
 						for (let k = 0; k < people.length; k++) {
 							const name1 = people[k].querySelector("#name1")
 								.value;
@@ -684,7 +711,6 @@
 						}
 						// ADD REQUEST INFO
 						inputs[i].value = finalValue;
-						console.log(finalValue);
 					} else if (inputs[i].name === "requestInfo") {
 						let finalValue = "";
 						let products = document.getElementsByClassName(
@@ -735,6 +761,17 @@
 					inputs[i].value = null;
 				}
 				document.getElementById("id-container").appendChild(newNode);
+			}
+			function checkAgregado(val) {
+				var element = document.getElementById("numPeople");
+				console.log(element);
+				if (val == "0") {
+					//ESCONDER NUM DE PESSOAS
+					element.style.display = "none";
+				} else {
+					//MOSTAR NUM DE PESSOAS
+					element.style.display = "block";
+				}
 			}
 		</script>
 	</body>

@@ -17,10 +17,20 @@
 		/>
 		<link rel="stylesheet" href="{% static "./css/new.css"%}">
 		<title>Ponto Vermelho</title>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	</head>
 
 	<body>
 		<main>
+			{% if messages %} {% for message in messages %}
+			<script>
+				Swal.fire({
+					icon: "error",
+					title: "Oops...",
+					text: "{{message}}",
+				});
+			</script>
+			{% endfor %} {% endif %}
 			<section id="home">
 				<div class="create-account">
 					<form class="create-account-form" method="POST">
@@ -31,14 +41,6 @@
 									><img src="{% static "./img/logo.png"%}"
 									alt="logo-ponto-vermelho"></a
 								>
-							</div>
-
-							<div class="error-div">
-								{% if messages %} {% for message in messages %}
-								<p>
-									{{message}}
-								</p>
-								{% endfor %} {% endif %}
 							</div>
 
 							<div class="form-line">
@@ -63,29 +65,41 @@
 								<div class="form-field public">
 									<label for="public">Público-alvo:</label>
 									<br />
-									<select name="publico" id="publico" onchange="checkOthers(this.value)">
-										{% for publico in form.publicoAlvo %}
-											<option value="{{publico}}">{{publico}}</option>
-										{% endfor %}
+									<select
+										name="publicoAlvo"
+										id="publicoAlvo"
+										onchange="checkOthers(this.value)"
+									>
+										<option value="População sem abrigo"
+											>População sem abrigo</option
+										>
+										<option
+											value="Beneficiários do Rendimento Social de Inserção"
+											>Beneficiários do Rendimento Social
+											de Inserção</option
+										>
+										<option
+											value="Grávidas em situação de risco"
+											>Grávidas em situação de
+											risco</option
+										>
+										<option
+											value="Vítimas de violência domésticao"
+											>Vítimas de violência
+											doméstica</option
+										>
+										<option value="Outros">Outros</option>
 									</select>
-									<!--{{form.publicoAlvo}}-->
 								</div>
-								<br />
-								<div class="form-field public">
-									<input type="text" name="public-kind" id="others" style='display: none;'/>
+								<div
+									id="others"
+									class="form-field public"
+									style="display: none;"
+								>
+									<label for="public">Outros:</label>
+									<br />
+									<input type="text" name="publicKind" />
 								</div>
-
-								<!--{% if form.publicoAlvo == Outros %}
-									<div class="form-field">
-										<label for="public-kind">Outro:</label>
-										<br />
-										<input
-											type="text"
-											name="public-kind"
-											required
-										/>
-									</div>
-								{% endif %}-->
 							</div>
 
 							<div class="form-line">
@@ -137,13 +151,13 @@
 			</section>
 		</main>
 		<script type="text/javascript">
-			function checkOthers(val){
+			function checkOthers(val) {
 				var element = document.getElementById("others");
-				if(val == "Outros"){
-					element.style.display = 'block';
-				}
-				else{
-					element.style.display = 'none';
+				console.log(element);
+				if (val == "Outros") {
+					element.style.display = "block";
+				} else {
+					element.style.display = "none";
 				}
 			}
 		</script>
