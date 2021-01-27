@@ -17,14 +17,24 @@
   <main>
     {% if messages %}
 {% for message in messages %}
+{% if message.tags == 'error' %}
   <script>
     Swal.fire({
   icon: 'error',
   title: 'Oops...',
-  text: 'Não autorizado.',
+      text: '{{message}}',
   footer: 'Contactar: email@email.com'
 })
   </script>
+{% elif message.tags == 'success' %}
+  <script>
+    Swal.fire({
+  icon: 'success',
+  title: 'Sucesso!',
+      text: '{{message}}',
+})
+  </script>
+  {% endif %}
 {% endfor %}
 {% endif %}
     <section id="home">

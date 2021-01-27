@@ -58,8 +58,7 @@ numeroElementos = [
 
 tiposPedidos = [
     ["Requisição interna", "Requisição interna"],
-    ["Individual", "Individual"],
-    ["Agregado", "Agregado"]
+    ["Individual", "Agregado"],
 ]
 
 estadoPedidos = [
@@ -79,9 +78,9 @@ class RequestedProduct(models.Model):
         return "\n\n" + str(self.produto) +"\n- Tamanho: "+ self.tamanho +"\n    - Quantidade: "+ str(self.quantidade)
 
 class RequestedPerson(models.Model):
-    nomeBeneficiario = models.CharField(max_length = 100)
     nomeTecnico = models.CharField(max_length = 100)
-    cartaoCidadao = models.IntegerField(unique = True)
+    nomeBeneficiario = models.CharField(max_length = 100)
+    cartaoCidadao = models.IntegerField(unique = False)
     telefone = models.IntegerField(unique = False)
 
     def __str__(self):

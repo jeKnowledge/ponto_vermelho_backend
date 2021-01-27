@@ -10,6 +10,7 @@ from django.core import serializers
 from .models import Instituicao, Pedido, Produto, RequestedPerson, RequestedProduct
 from .forms import *
 from django.contrib.auth.decorators import login_required
+from datetime import datetime
 
 # Create your views here.
 def index(request):
@@ -80,7 +81,7 @@ def request_view(request):
     formData = {}
 
     if not request.user.aceite:
-        messages.error(request, 'Não autorizado')
+        messages.error(request, 'Não autorizado.')
         return redirect("personal")
 
 
@@ -96,6 +97,7 @@ def request_view(request):
             if(formData["requestType"] != "intern"):
                 #NEED TO ADD PEOPLE
                 peopleInfo = formData["peopleInfo"].split("/")
+                print(peopleInfo)
                 if(formData["requestType"] == "individual" and len(peopleInfo) != 1):
                     print("ERRO QUANTAS PESSOAS")
                     return
@@ -103,6 +105,7 @@ def request_view(request):
 
                 for person in peopleInfo:
                     personData = person.split(",")
+                    print(personData)
                     name1 = personData[0]
                     name2 = personData[1]
                     cc = int(personData[2])
@@ -110,11 +113,19 @@ def request_view(request):
                     queryPerson = RequestedPerson.objects.filter(cartaoCidadao=cc)
                     if(queryPerson):
                         # NEED TO CHECK IF ANY REQUEST FOR 6 MONTHS
-                        person = queryPerson[0]
+                        flagError = 0
+
+                        for person in queryPerson:
+                            queryPedido = Pedido.objects.filter(listPeople__id__exact=queryPerson[0].id).order_by("-createdAt")[0]
+                            if(queryPedido):
+                                flagError = 1
+                                break
+                        if(flagError):
+                            messages.error(request, 'Apenas são permitidos pedidos de 6 em 6 meses.')
+                            return redirect("personal")
+
                         pass
-                    else:
-                        # NEED TO CREATE OBJECT
-                        person = RequestedPerson(nomeBeneficiario=name2, nomeTecnico=name1, cartaoCidadao=cc, telefone=phoneNumber)
+                    person = RequestedPerson(nomeBeneficiario=name2, nomeTecnico=name1, cartaoCidadao=cc, telefone=phoneNumber)
                     peopleObjects.append(person)
 
             # VALIDATE PRODUCTS
@@ -194,11 +205,13 @@ def request_view(request):
                         for obj in peopleObjects:
                             newRequest.listPeople.add(obj)
 
+                    messages.success(request, 'Pedido enviado.')
+                    return redirect("personal")
+
         else:
-            print(form.errors)
-    print(query[0].tamanhosPossiveisAdulto, "***********************")
-    print(range(query[0].quantidadeMaxima + 1))
-    print(query);
+            messages.error(request, 'Pedido não válido.')
+            return redirect("personal")
+
     return render(request, "request.html",{"products": query, "productsJSON":query_json, "form": form, "tamanhos": query[0].tamanhosPossiveisAdulto.split(","), "range": range(1, query[0].quantidadeMaxima + 1)})
 
 @login_required

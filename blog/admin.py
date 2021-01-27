@@ -32,20 +32,13 @@ class PedidoFilter(SimpleListFilter):
 
 class AdminPedido(admin.ModelAdmin):
     list_display = ["equipa", "tipoPedido","estadoPedido", "data_de_pedido", "numPeople"]
-    readonly_fields = ['admin_equipa', 'tipoPedido', 'listPeople', "numPeople", "admin_products"]
-    exclude=["equipa", "listProducts"]
+    readonly_fields = ['admin_equipa', 'tipoPedido',  "numPeople","admin_people" ,"admin_products"]
+    exclude=["equipa", "listProducts", "listPeople"]
     list_filter = (PedidoFilter,)
 
     def change_view(self, request, object_id, form_url='', extra_context=None):
         self.object_id = object_id
         return self.changeform_view(request, object_id, form_url, extra_context)
-
-    def formfield_for_manytomany(self, db_field, request, **kwargs):
-        if db_field.name == "listProducts":
-            kwargs["queryset"] = Pedido.objects.get(id=self.object_id).listProducts
-        if db_field.name == "listPeople":
-            kwargs["queryset"] = Pedido.objects.get(id=self.object_id).listPeople
-        return super().formfield_for_manytomany(db_field, request, **kwargs)
 
     def data_de_pedido(self, obj):
         return obj.createdAt.strftime("%d/%b/%Y - %H:%Mh")
@@ -62,6 +55,18 @@ class AdminPedido(admin.ModelAdmin):
             products_str += "<p style='color:#0181D3' ><b>" + product.produto.tipoProduto  +"</b></p><p style='margin-left:2.5em'>" +"<b>Quantidade:</b> "+ str(product.quantidade) + "</p><p style='margin-left:2.5em'>" +"<b>Tamanho:</b> " + product.tamanho+ "</p>"
         return format_html(products_str)
     admin_products.short_description = "Produtos"
+
+    def admin_people(self,obj):
+        listPeople = obj.listPeople.all()
+        string=""
+        for person in listPeople:
+            string += "<p><b>Técnico: </b>" + person.nomeTecnico +"</p>"
+            string += "<br/>"
+            string += "<p><b>Titular: </b>" + person.nomeBeneficiario +"</p>"
+            string += "<p><b>CC: </b>" + str(person.cartaoCidadao) +"</p>"
+            string += "<p><b>Telefone: </b>" + str(person.telefone) +"</p>"
+        return format_html(string)
+    admin_people.short_description = "Informação"
 
 
 
@@ -124,5 +129,5 @@ admin.site.register(Instituicao, AdminUser)
 admin.site.register(Produto, AdminProduto)
 admin.site.register(Pedido, AdminPedido)
 #admin.site.register(RequestedProduct)
-#admin.site.register(RequestedPerson)
+admin.site.register(RequestedPerson)
 admin.site.unregister(Group)

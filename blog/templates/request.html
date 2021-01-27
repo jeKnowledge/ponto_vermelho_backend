@@ -346,12 +346,6 @@
 				// if you have reached the end of the form... :
 				if (currentTab >= x.length) {
 					submitFormHidden();
-					swal(
-						"Pedido Enviado!",
-						"O seu pedido irá ser processado.",
-						"success"
-					);
-					showTab(0);
 					return false;
 				}
 				// Otherwise, display the correct tab:
@@ -389,7 +383,7 @@
 									swal("Nome inválido.");
 								}
 							} else if (y[i].name == "name2") {
-								var nameRegex = /^(?!-)[a-zA-Z-]*[a-zA-Z]$/;
+								var nameRegex = /^(?!-)[a-zA-Z- ]*[a-zA-Z ]$/;
 								if (!y[i].value.match(nameRegex)) {
 									valid = false;
 									swal("Nome inválido.");
