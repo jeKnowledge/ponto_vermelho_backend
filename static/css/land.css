@@ -8,11 +8,13 @@ nav {
   display: flex;
   height: 5vh;
   margin: 2%;
+  position: relative;
 }
 nav .nav-logos {
-  width: 100vw;
+  position: relative;
   display: flex;
   justify-content: flex-start;
+  width: 100%;
 }
 nav .nav-logos a{
   width: fit-content;
