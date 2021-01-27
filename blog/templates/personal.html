@@ -46,13 +46,33 @@
 
       <div class="personal-area">
         <div class="personal-info">
-          <img src="{% static "img/logo.png" %}" alt="logo">
-          <h2>{{user.instituicao}}</h2>
-          <h2>{{user.email}}</h2>
-          <h2>{{user.telefone}}</h2>
-          <h2>{{user.publicoAlvo}}</h2>
-          <h2>{{user.areaGeografica}}</h2>
-          <a href="#">Alterar Dados</a>
+          <a href="/"><img src="{% static "img/logo.png" %}" alt="logo"></a>
+          <div class="user-info">
+            <p>Equipa:</p>
+            <h2>{{user.username}}</h2>
+          </div>
+          <div class="user-info">
+            <p>Instituição:</p>
+            <h2>{{user.instituicao}}</h2>
+          </div>
+          <div class="user-info">
+            <p>E-mail:</p>
+            <h2>{{user.email}}</h2>
+          </div>
+          <div class="user-info">
+            <p>Telefone:</p>
+            <h2>{{user.telefone}}</h2>
+          </div>
+          <div class="user-info">
+            <p>Público Alvo:</p>
+            <h2>{{user.publicoAlvo}}</h2>
+          </div>
+          <div class="user-info">
+            <p>Área Geográfica:</p>
+            <h2>{{user.areaGeografica}}</h2>
+          </div>
+
+          <!-- <a href="#">Alterar Dados</a> -->
         </div>
 
         <div class="personal-requests">

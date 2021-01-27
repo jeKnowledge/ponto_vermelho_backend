@@ -5,16 +5,25 @@
 }
 
 nav {
-  position: absolute;
   display: flex;
+  height: 5vh;
+  margin: 2%;
 }
-
-nav img {
-  width: 15%;
+nav .nav-logos {
+  width: 100vw;
+  display: flex;
+  justify-content: flex-start;
 }
-
-nav a {
-  margin: 1.5%;
+nav .nav-logos a{
+  width: fit-content;
+  height: 100%;
+}
+nav .nav-logos img {
+  height: 100%;
+}
+nav .nav-logos a:nth-child(2){
+  margin: 0 2.5%;
+  transform: scale(1.5 , 1.5);
 }
 
 nav #portal {
@@ -26,7 +35,7 @@ nav #portal {
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
   border-radius: 100px;
   position: fixed;
-  right: 0;
+  right: 2%;
   z-index: 10;
   transition: 0.4s;
 }
@@ -436,11 +445,35 @@ footer .social {
 }
 
 .copyright {
-  float: right;
-  text-align: right;
-  margin-right: 10%;
+  width: 80%;
+  margin: 0 auto;
   color: #FFFFFF;
   font-size: 14px;
+  display: flex;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  align-items: center;
+  justify-content: space-between;
+}
+.by-jek{
+  display: flex;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  align-items: center;
+  width: fit-content;
+}
+.by-jek a{
+  width: 15%;
+  margin: 2.5%;
+}
+.by-jek img{
+  width: 100%;
 }
 
 @media only screen and (max-width: 550px) {

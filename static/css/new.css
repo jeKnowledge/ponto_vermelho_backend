@@ -36,9 +36,10 @@
 	left: 50%;
 	transform: translate(-50%, -50%);
 	width: 80%;
-	height: 85%;
+	height: auto;
+	margin: 0;
+	padding-bottom: 5%;
 }
-
 .form-container {
 	padding: 0 15%;
 }

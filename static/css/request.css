@@ -3,6 +3,9 @@
 	padding: 0;
 	font-family: "Poppins", sans-serif;
 }
+body{
+	overflow: hidden;
+}
 #home {
 	position: fixed;
 	width: 100vw;
@@ -205,7 +208,15 @@ button:focus {
 	-ms-user-select: none;
 	user-select: none;
 }
-
+.select{
+	padding-left: 0;
+	margin-top: 2%;
+}
+.select select{
+	color:  #014e82;
+	border-style: none;
+	border-bottom: 1px solid #0181d3;
+}
 .container input {
 	position: absolute;
 	opacity: 0;
@@ -296,7 +307,7 @@ button:focus {
 .id-container {
 	height: 55%;
 	padding: 10% 15%;
-	overflow-y: scroll;
+	overflow-y: hidden;
 }
 
 .id-container label {
@@ -334,7 +345,6 @@ button:focus {
 	display: flex;
 	justify-content: space-between;
 	padding-bottom: 15%;
-	border-bottom: 3px solid rgba(1,78,130, 0.8);
 }
 .num {
 	width: 40%;
