@@ -1,773 +1,717 @@
 <!DOCTYPE html>
 <html lang="pt" dir="ltr">
-	<head>
-		{% load static %}
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/png" href="{% static
-		"./img/favicon-32x32.png"%}" sizes="32x32" /> <link rel="icon"
-		type="image/png" href="{% static "./img/favicon-16x16.png"%}"
-		sizes="16x16" />
-		<meta
-			name="viewport"
-			content="user-scalable=no, initial-scale=1, height=device-height"
-		/>
-		<link
-			href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap"
-			rel="stylesheet"
-		/>
-		<link rel="stylesheet" href="{% static "./css/request.css"%}">
-		<title>Pedido</title>
-	</head>
+  <head>
+    {% load static %}
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="{% static
+    "./img/favicon-32x32.png"%}" sizes="32x32" /> <link rel="icon"
+    type="image/png" href="{% static "./img/favicon-16x16.png"%}" sizes="16x16"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, initial-scale=1, height=device-height"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static "./css/request.css"%}">
+    <title>Pedido</title>
+  </head>
 
-	<body>
-		<main>
-			<section id="home">
-				<div class="action-icons action-icons-desktop">
-					<a href="/profile"
-						><img src="{% static "./img/profileb.png"%}"
-						alt="profile-icon" title="Área Pessoal"></a
-					>
-					<a href="/signout"
-						><img src="{% static "img/logoutb.png" %}"
-						alt="leave-icon" title="Sair"></a
-					>
-				</div>
-				<div class="action-icons action-icons-mobile">
-					<a href="/profile"
-						><img src="{% static "./img/profile.png"%}"
-						alt="profile-icon" title="Área Pessoal"></a
-					>
-					<a href="/signout"
-						><img src="{% static "./img/logout.png"%}"
-						alt="leave-icon" title="Sair"></a
-					>
-				</div>
+  <body>
+    <main>
+      <section id="home">
+        <div class="action-icons action-icons-desktop">
+          <a href="/profile"
+            ><img src="{% static "./img/profileb.png"%}" alt="profile-icon"
+            title="Área Pessoal"></a
+          >
+          <a href="/signout"
+            ><img src="{% static "img/logoutb.png" %}" alt="leave-icon"
+            title="Sair"></a
+          >
+        </div>
+        <div class="action-icons action-icons-mobile">
+          <a href="/profile"
+            ><img src="{% static "./img/profile.png"%}" alt="profile-icon"
+            title="Área Pessoal"></a
+          >
+          <a href="/signout"
+            ><img src="{% static "./img/logout.png"%}" alt="leave-icon"
+            title="Sair"></a
+          >
+        </div>
 
-				<div class="intro">
-					<a href="/"
-						><img src="{% static "./img/logo.png"%}"
-						alt="logo-ponto-vermelho"></a
-					>
-				</div>
+        <div class="intro">
+          <a href="/"
+            ><img src="{% static "./img/logo.png"%}"
+            alt="logo-ponto-vermelho"></a
+          >
+        </div>
 
-				<div class="request">
-					<form class="request-kind" method="post">
-						<div class="tab">
-							<div class="kind-container">
-								<h2>Tipo de Pedido:</h2>
+        <div class="request">
+          <form class="request-kind" method="post">
+            <div class="tab">
+              <div class="kind-container">
+                <h2>Tipo de Pedido:</h2>
 
-								<div class="kind-check">
-									<label class="container"
-										>Requisição interna (CVP-Braga)
-										<input
-											type="radio"
-											name="check"
-											value="0"
-											id="op0"
-											onchange="checkAgregado(this.value)"
-										/>
-										<span class="checkmark"></span>
-									</label>
-									<br />
-									<br />
-									<label class="container"
-										>Beneficiários
-										<input
-											type="radio"
-											name="check"
-											value="1"
-											id="op1"
-											onchange="checkAgregado(this.value)"
-										/>
-										<span class="checkmark"></span>
-									</label>
-									<label
-										style="display: none;"
-										class="container select"
-										id="numPeople"
-										>
-										<select
-											name="numPeople"
-											id="numPeopleField"
-										>
-											<option value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
-											<option value="5">5</option>
-											<option value="6">6</option>
-										</select>
-										Número de Pessoas
-									</label>
-								</div>
-							</div>
-						</div>
-						<div class="tab">
-							<div class="id-container" id="id-container">
-								<h2>Identificação do Beneficiário:</h2>
+                <div class="kind-check">
+                  <label class="container"
+                    >Requisição interna (CVP-Braga)
+                    <input
+                      type="radio"
+                      name="check"
+                      value="0"
+                      id="op0"
+                      onchange="checkAgregado(this.value)"
+                    />
+                    <span class="checkmark"></span>
+                  </label>
+                  <br />
+                  <br />
+                  <label class="container"
+                    >Beneficiários
+                    <input
+                      type="radio"
+                      name="check"
+                      value="1"
+                      id="op1"
+                      onchange="checkAgregado(this.value)"
+                    />
+                    <span class="checkmark"></span>
+                  </label>
+                  <label
+                    style="display: none;"
+                    class="container select"
+                    id="numPeople"
+                  >
+                    <select name="numPeople" id="numPeopleField">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                    </select>
+                    Número de Pessoas
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="tab">
+              <div class="id-container" id="id-container">
+                <h2>Identificação do Beneficiário:</h2>
 
-								<div class="person-div" id="person-div">
-									<div class="id-field">
-										<label for="name1"
-											>Nome do/a técnico/a de
-											referência:</label
-										>
-										<br />
-										<input
-											id="name1"
-											type="text"
-											name="name1"
-											required
-										/>
-									</div>
+                <div class="person-div" id="person-div">
+                  <div class="id-field">
+                    <label for="name1"
+                      >Nome do/a técnico/a de referência:</label
+                    >
+                    <br />
+                    <input id="name1" type="text" name="name1" required />
+                  </div>
 
-									<div class="id-field">
-										<label for="name2"
-											>Nome do/a beneficiário/a
-											titular:</label
-										>
-										<br />
-										<input
-											id="name2"
-											type="text"
-											name="name2"
-											required
-										/>
-									</div>
+                  <div class="id-field">
+                    <label for="name2">Nome do/a beneficiário/a titular:</label>
+                    <br />
+                    <input id="name2" type="text" name="name2" required />
+                  </div>
 
-									<div class="id-nums">
-										<div class="id-field num">
-											<label for="cc">Nº do CC:</label>
-											<br />
-											<input
-												id="cc"
-												type="number"
-												name="cc"
-												required
-											/>
-										</div>
-										<div class="id-field num">
-											<label for="phone"
-												>Nº de telefone:</label
-											>
-											<br />
-											<input
-												id="phone"
-												type="tel"
-												name="phone"
-												required
-											/>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+                  <div class="id-nums">
+                    <div class="id-field num">
+                      <label for="cc">Nº do CC:</label>
+                      <br />
+                      <input id="cc" type="number" name="cc" required />
+                    </div>
+                    <div class="id-field num">
+                      <label for="phone">Nº de telefone:</label>
+                      <br />
+                      <input id="phone" type="tel" name="phone" required />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-						<div class="request-but">
-							<a id="back" onclick="nextPrev(-1)">
-								<img src="{% static "./img/back.svg"%}"
-								alt="back-arrow" />
-							</a>
+            <div class="request-but">
+              <a id="back" onclick="nextPrev(-1)">
+                <img src="{% static "./img/back.svg"%}" alt="back-arrow" />
+              </a>
 
-							<a
-								class="plus-button"
-								id="plus-button"
-								onclick="addPerson()"
-							>
-								<p>+</p>
-							</a>
-							<a id="next" onclick="nextPrev(1)">
-								<img src="{% static "./img/next.svg"%}"
-								alt="next-arrow" />
-							</a>
-							<!---	<button id="sub" style="display: none;">
+              <a class="plus-button" id="plus-button" onclick="addPerson()">
+                <p>+</p>
+              </a>
+              <a id="next" onclick="nextPrev(1)">
+                <img src="{% static "./img/next.svg"%}" alt="next-arrow" />
+              </a>
+              <!---	<button id="sub" style="display: none;">
 								<button type="submit" name="button">
 									<img src="{% static "./img/next.svg"%}"
 									alt="next-arrow" />
 								</button>
 								</button> -->
-						</div>
-						<div class="tab">
-							<div
-								class="clothing-container"
-								id="clothing-container"
-							>
-								<h2>Pedido:</h2>
-								<div class="product-div" id="product-div">
-									<div class="clothing-line">
-										<div class="clothing-field">
-											<label for="description"
-												>Descrição do Produto:</label
-											>
-											<br />
-											<select
-												name="description"
-												id="description"
-												onchange="tipoProdutoChanged(0)"
-											>
-												{% for product in products %}
-												<option
-													value="{{product.tipoProduto}}"
-													>{{product.tipoProduto}}</option
-												>
-												{% endfor %}
-											</select>
-										</div>
+            </div>
 
-										<div class="clothing-field">
-											<label for="quantity"
-												>Quantidade:</label
-											>
-											<br />
-											<select
-												name="quantity"
-												id="quantity"
-											>
-												{% for quantity in range %}
-												<option value="{{quantity}}"
-													>{{quantity}}</option
-												>
-												{% endfor %}
-											</select>
-										</div>
-									</div>
+            <div class="tab">
+              <div class="info-container" id="info-container">
+                <h2>Informações:</h2>
+                <div class="info-div" id="info-div">
+                  <h3 class="element-text">Elemento 1:</h3>
+                  <div class="clothing-line">
+                    <div class="info-field">
+                      <label for="description">Sexo:</label>
+                      <br />
+                      <select name="sexo" id="sexo">
+                        <option value="f">Feminino</option>
+                        <option value="m">Masculino</option>
+                        <option value="outro">Outro</option>
+                      </select>
+                    </div>
 
-									<div class="clothing-line">
-										<div
-											class="clothing-field"
-											id="type-size-div"
-										>
-											<label for="size"
-												>Tipo de Tamanho:</label
-											>
-											<br />
-											<select
-												name="type-size"
-												id="type-size"
-												onchange="typeSizeChanged(0)"
-											>
-												<option value="Adulto"
-													>Adulto</option
-												>
-												<option value="Criança"
-													>Criança</option
-												>
-											</select>
-										</div>
-										<div class="clothing-field">
-											<label for="size">Tamanho:</label>
-											<br />
-											<select name="size" id="size">
-												{% for size in tamanhos %}
-												<option value="{{size}}"
-													>{{size}}</option
-												>
-												{% endfor %}
-											</select>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</form>
+                    <div class="info-field">
+                      <label for="age">Idade:</label>
+                      <br />
+                      <input id="age" type="number" name="age" required />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-					<form hidden class="hidden-form" method="POST">
-						{% csrf_token %} {{form.requestType}}
-						{{form.peopleInfo}} {{form.requestInfo}}
-						{{form.numPeople}}
-					</form>
-				</div>
-			</section>
-		</main>
-		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-		<script>
-			var product;
+            <div class="tab">
+              <div class="clothing-container" id="clothing-container">
+                <h2>Pedido:</h2>
+                <div class="product-div" id="product-div">
+                  <div class="clothing-line">
+                    <div class="clothing-field">
+                      <label for="description">Descrição do Produto:</label>
+                      <br />
+                      <select
+                        name="description"
+                        id="description"
+                        onchange="tipoProdutoChanged(0)"
+                      >
+                        {% for product in products %}
+                        <option value="{{product.tipoProduto}}"
+                          >{{product.tipoProduto}}</option
+                        >
+                        {% endfor %}
+                      </select>
+                    </div>
 
-			var back = document.getElementById("back");
-			var next = document.getElementById("next");
-			var sub = document.getElementById("sub");
+                    <div class="clothing-field">
+                      <label for="quantity">Quantidade:</label>
+                      <br />
+                      <select name="quantity" id="quantity">
+                        {% for quantity in range %}
+                        <option value="{{quantity}}">{{quantity}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
 
-			var op0 = document.getElementById("op0");
-			var op1 = document.getElementById("op1");
+                  <div class="clothing-line">
+                    <div class="clothing-field" id="type-size-div">
+                      <label for="size">Faixa Etária:</label>
+                      <br />
+                      <select
+                        name="type-size"
+                        id="type-size"
+                        onchange="typeSizeChanged(0)"
+                      >
+                        <option value="Adulto">Adulto</option>
+                        <option value="Criança">Criança</option>
+                      </select>
+                    </div>
+                    <div class="clothing-field">
+                      <label for="size">Tamanho:</label>
+                      <br />
+                      <select name="size" id="size">
+                        {% for size in tamanhos %}
+                        <option value="{{size}}">{{size}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
 
-			var inputs = document.getElementsByTagName("input");
+          <form hidden class="hidden-form" method="POST">
+            {% csrf_token %} {{form.requestType}} {{form.peopleInfo}}
+            {{form.requestInfo}} {{form.numPeople}} {{form.ageAndGenderInfo}}
+          </form>
+        </div>
+      </section>
+    </main>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+      var product;
 
-			var kind = document.querySelector(".kind-container");
-			var id = document.querySelector(".id-container");
+      var back = document.getElementById("back");
+      var next = document.getElementById("next");
+      var sub = document.getElementById("sub");
 
-			var numProdutos = 0;
+      var op0 = document.getElementById("op0");
+      var op1 = document.getElementById("op1");
 
-			var currentTab = 0; // Current tab is set to be the first tab (0)
-			showTab(currentTab); // Display the current tab
+      var inputs = document.getElementsByTagName("input");
 
-			function showTab(n) {
-				var x = document.getElementsByClassName("tab");
-				x[n].style.display = "block";
-				if (n == 0) {
-					document.getElementById("back").style.opacity = 0.3;
-					document.getElementById("back").onclick = false;
-				} else {
-					document.getElementById("back").style.opacity = 1;
-					document.getElementById("back").onclick = () =>
-						nextPrev(-1);
-				}
-				if (n == x.length - 1) {
-					document.getElementById("plus-button").style.display =
-						"block";
-					document.getElementById("plus-button").onclick = () =>
-						addPedido();
-				} else {
-					if (n == x.length - 2 && op2.checked) {
-						document.getElementById("plus-button").style.display =
-							"block";
-						document.getElementById("plus-button").onclick = () =>
-							addPerson();
-					} else {
-						document.getElementById("plus-button").style.display =
-							"none";
-					}
-				}
-			}
+      var kind = document.querySelector(".kind-container");
+      var id = document.querySelector(".id-container");
 
-			function nextPrev(n) {
-				// This function will figure out which tab to display
-				var x = document.getElementsByClassName("tab");
-				// Exit the function if any field in the current tab is invalid:
-				if (n == 1 && !validateForm()) return false;
-				// Hide the current tab:
-				x[currentTab].style.display = "none";
-				// Increase or decrease the current tab by 1:
-				if (n === 1 && currentTab === 0 && op0.checked) {
-					currentTab = currentTab + 2;
-				} else if (n === -1 && currentTab === 2 && op0.checked) {
-					currentTab = currentTab - 2;
-				} else {
-					currentTab = currentTab + n;
-				}
-				// if you have reached the end of the form... :
-				if (currentTab >= x.length) {
-					submitFormHidden();
-					return false;
-				}
-				// Otherwise, display the correct tab:
-				showTab(currentTab);
-			}
+      var numProdutos = 0;
 
-			function validateForm() {
-				// This function deals with validation of the form fields
-				var x,
-					y,
-					i,
-					valid = true;
-				x = document.getElementsByClassName("tab");
-				y = x[currentTab].getElementsByTagName("input");
-				// A loop that checks every input field in the current tab:
-				if (currentTab === 0) {
-					if (!op0.checked && !op1.checked) {
-						valid = false;
-						swal("Por favor, selecione uma opção.");
-					}
-				}
-				if (currentTab === 1) {
-					for (i = 0; i < y.length; i++) {
-						if (y[i].value == "") {
-							valid = false;
-							swal("Por favor, preencha todos os campos.");
-						}
-					}
-					if (valid) {
-						for (i = 0; i < y.length; i++) {
-							if (y[i].name == "name1") {
-								var nameRegex = /^(?!-)[a-zA-Z- ]*[a-zA-Z]$/;
-								if (!y[i].value.match(nameRegex)) {
-									valid = false;
-									swal("Nome inválido.");
-								}
-							} else if (y[i].name == "name2") {
-								var nameRegex = /^(?!-)[a-zA-Z- ]*[a-zA-Z ]$/;
-								if (!y[i].value.match(nameRegex)) {
-									valid = false;
-									swal("Nome inválido.");
-								}
-							} else if (y[i].name == "cc") {
-								var ccRegex = /^[0-9]+$/;
-								if (!y[i].value.match(ccRegex)) {
-									valid = false;
-									swal(
-										"Número de cartão de cidadão inválido."
-									);
-								}
-							} else if (y[i].name == "phone") {
-								var phoneRegex = /^[0-9]{3}[ ]*[0-9]{3}[ ]*[0-9]{3}$/;
-								if (!y[i].value.match(phoneRegex)) {
-									valid = false;
-									swal("Número de telemóvel inválido.");
-								}
-							}
-							if (!valid) {
-								break;
-							}
-						}
-					}
-				}
-				if (currentTab === 2) {
-					for (i = 0; i < y.length; i++) {
-						if (y[i].value == "") {
-							valid = false;
-							swal("Por favor, preencha todos os campos.");
-						}
-						if (!valid) {
-							break;
-						}
-					}
-				}
-				return valid;
-			}
+      var currentTab = 0; // Current tab is set to be the first tab (0)
+      showTab(currentTab); // Display the current tab
 
-			function addPedido() {
-				var myJSONList = "{{productsJSON}}".replace(
-					/&(l|g|quo)t;/g,
-					function (a, b) {
-						return {
-							l: "<",
-							g: ">",
-							quo: '"',
-						}[b];
-					}
-				);
+      function showTab(n) {
+        var x = document.getElementsByClassName("tab");
+        x[n].style.display = "block";
+        if (n == 0) {
+          document.getElementById("back").style.opacity = 0.3;
+          document.getElementById("back").onclick = false;
+        } else if (n == 2) {
+          document.getElementById("back").style.opacity = 1;
+          document.getElementById("back").onclick = () => nextPrev(-1);
 
-				myData = JSON.parse(myJSONList);
-				const selected = myData[0];
+          let numPeople = document.getElementById("numPeopleField").value;
+          console.log(numPeople);
+          let query = x[2].getElementsByClassName("info-div");
 
-				numProdutos++;
-				const newNode = document
-					.getElementById("product-div")
-					.cloneNode(true);
+          const query_len = query.length;
+          for (let i = 1; i < query_len; i++) {
+            query[query.length - 1].parentNode.removeChild(
+              query[query.length - 1]
+            );
+          }
 
-				var numProdutosCopy = numProdutos;
-				newNode.querySelector("#description").onchange = () =>
-					tipoProdutoChanged(numProdutosCopy);
-				newNode.querySelector("#type-size").onchange = () =>
-					typeSizeChanged(numProdutosCopy);
-				newNode.querySelector("#type-size-div").style.display = "block";
+          for (let i = 2; i < parseInt(numPeople) + 1; i++) {
+            const div = x[2].getElementsByClassName("info-container")[0];
+            var cloneNode = query[0].cloneNode(true);
+            const text = cloneNode.getElementsByClassName("element-text")[0];
+            text.innerHTML = `Elemento ${i}:`;
+            div.appendChild(cloneNode);
+          }
+        } else {
+          document.getElementById("back").style.opacity = 1;
+          document.getElementById("back").onclick = () => nextPrev(-1);
+        }
+        if (n == x.length - 1) {
+          document.getElementById("plus-button").style.display = "block";
+          document.getElementById("plus-button").onclick = () => addPedido();
+        } else {
+          document.getElementById("plus-button").style.display = "none";
+        }
+      }
 
-				// RESET NA QUANTIDADE MAXIMA
-				let selectHTML = newNode.querySelector("#quantity");
+      function nextPrev(n) {
+        // This function will figure out which tab to display
+        var x = document.getElementsByClassName("tab");
+        // Exit the function if any field in the current tab is invalid:
+        if (n == 1 && !validateForm()) return false;
+        // Hide the current tab:
+        x[currentTab].style.display = "none";
+        // Increase or decrease the current tab by 1:
+        if (n === 1 && currentTab === 0 && op0.checked) {
+          currentTab = currentTab + 3;
+        } else if (n === -1 && currentTab === 3 && op0.checked) {
+          currentTab = currentTab - 3;
+        } else {
+          currentTab = currentTab + n;
+        }
+        // if you have reached the end of the form... :
+        if (currentTab >= x.length) {
+          submitFormHidden();
+          return false;
+        }
+        // Otherwise, display the correct tab:
+        showTab(currentTab);
+      }
 
-				let length = selectHTML.options.length;
+      function validateForm() {
+        // This function deals with validation of the form fields
+        var x,
+          y,
+          i,
+          valid = true;
+        x = document.getElementsByClassName("tab");
+        y = x[currentTab].getElementsByTagName("input");
+        // A loop that checks every input field in the current tab:
+        if (currentTab === 0) {
+          if (!op0.checked && !op1.checked) {
+            valid = false;
+            swal("Por favor, selecione uma opção.");
+          }
+        }
+        if (currentTab === 1) {
+          for (i = 0; i < y.length; i++) {
+            if (y[i].value == "") {
+              valid = false;
+              swal("Por favor, preencha todos os campos.");
+            }
+          }
+          if (valid) {
+            for (i = 0; i < y.length; i++) {
+              if (y[i].name == "name1") {
+                var nameRegex = /^.+$/;
+                if (!y[i].value.replace(/\s/g, "").match(nameRegex)) {
+                  valid = false;
+                  swal("Nome inválido.");
+                }
+              } else if (y[i].name == "name2") {
+                var nameRegex = /^.+$/;
+                if (!y[i].value.replace(/\s/g, "").match(nameRegex)) {
+                  valid = false;
+                  swal("Nome inválido.");
+                }
+              } else if (y[i].name == "cc") {
+                var ccRegex = /^[0-9]+$/;
+                if (!y[i].value.match(ccRegex)) {
+                  valid = false;
+                  swal("Número de cartão de cidadão inválido.");
+                }
+              } else if (y[i].name == "phone") {
+                var phoneRegex = /^[0-9]{3}[ ]*[0-9]{3}[ ]*[0-9]{3}$/;
+                if (!y[i].value.match(phoneRegex)) {
+                  valid = false;
+                  swal("Número de telemóvel inválido.");
+                }
+              }
+              if (!valid) {
+                break;
+              }
+            }
+          }
+        }
+        if (currentTab === 3 || currentTab === 2) {
+          for (i = 0; i < y.length; i++) {
+            if (y[i].value == "") {
+              valid = false;
+              swal("Por favor, preencha todos os campos.");
+            }
+            if (!valid) {
+              break;
+            }
+          }
+        }
+        return valid;
+      }
 
-				for (i = length - 1; i >= 0; i--) {
-					selectHTML.options[i] = null;
-				}
+      function addPedido() {
+        var myJSONList = "{{productsJSON}}".replace(/&(l|g|quo)t;/g, function (
+          a,
+          b
+        ) {
+          return {
+            l: "<",
+            g: ">",
+            quo: '"',
+          }[b];
+        });
 
-				for (var i = 1; i <= selected.fields.quantidadeMaxima; i++) {
-					var newOption = document.createElement("option");
-					newOption.text = i.toString();
-					newOption.value = i;
-					selectHTML.options.add(newOption);
-				}
+        myData = JSON.parse(myJSONList);
+        const selected = myData[0];
 
-				// RESET NOS TAMANHOS
-				selectHTML = newNode.querySelector("#size");
-				length = selectHTML.options.length;
+        numProdutos++;
+        const newNode = document.getElementById("product-div").cloneNode(true);
 
-				for (i = length - 1; i >= 0; i--) {
-					selectHTML.options[i] = null;
-				}
+        var numProdutosCopy = numProdutos;
+        newNode.querySelector("#description").onchange = () =>
+          tipoProdutoChanged(numProdutosCopy);
+        newNode.querySelector("#type-size").onchange = () =>
+          typeSizeChanged(numProdutosCopy);
+        newNode.querySelector("#type-size-div").style.display = "block";
 
-				selected.fields.tamanhosPossiveisAdulto
-					.split(",")
-					.map((elem) => {
-						var newOption = document.createElement("option");
-						newOption.text = elem.replace(/^\s+|\s+$/g, "");
-						newOption.value = elem.replace(/^\s+|\s+$/g, "");
-						selectHTML.options.add(newOption);
-					});
+        // RESET NA QUANTIDADE MAXIMA
+        let selectHTML = newNode.querySelector("#quantity");
 
-				document
-					.getElementById("clothing-container")
-					.appendChild(newNode);
-			}
+        let length = selectHTML.options.length;
 
-			function typeSizeChanged(num) {
-				const tipoProduto = document
-					.querySelectorAll(".product-div")
-					[num].querySelector("#description").value;
-				var myJSONList = "{{productsJSON}}".replace(
-					/&(l|g|quo)t;/g,
-					function (a, b) {
-						return {
-							l: "<",
-							g: ">",
-							quo: '"',
-						}[b];
-					}
-				);
+        for (i = length - 1; i >= 0; i--) {
+          selectHTML.options[i] = null;
+        }
 
-				myData = JSON.parse(myJSONList);
-				const selected = myData.find(
-					(elem) => elem.fields.tipoProduto === tipoProduto
-				);
+        for (var i = 1; i <= selected.fields.quantidadeMaxima; i++) {
+          var newOption = document.createElement("option");
+          newOption.text = i.toString();
+          newOption.value = i;
+          selectHTML.options.add(newOption);
+        }
 
-				var length = document
-					.querySelectorAll(".product-div")
-					[num].querySelector("#size").options.length;
+        // RESET NOS TAMANHOS
+        selectHTML = newNode.querySelector("#size");
+        length = selectHTML.options.length;
 
-				//TAMANHOS
-				const selectHTML = document
-					.querySelectorAll(".product-div")
-					[num].querySelector("#size");
+        for (i = length - 1; i >= 0; i--) {
+          selectHTML.options[i] = null;
+        }
 
-				for (i = length - 1; i >= 0; i--) {
-					selectHTML.options[i] = null;
-				}
+        selected.fields.tamanhosPossiveisAdulto.split(",").map((elem) => {
+          var newOption = document.createElement("option");
+          newOption.text = elem.replace(/^\s+|\s+$/g, "");
+          newOption.value = elem.replace(/^\s+|\s+$/g, "");
+          selectHTML.options.add(newOption);
+        });
 
-				if (
-					document
-						.querySelectorAll(".product-div")
-						[num].querySelector("#type-size").value === "Adulto"
-				) {
-					selected.fields.tamanhosPossiveisAdulto
-						.split(",")
-						.map((elem) => {
-							var newOption = document.createElement("option");
-							newOption.text = elem.replace(/^\s+|\s+$/g, "");
-							newOption.value = elem.replace(/^\s+|\s+$/g, "");
-							selectHTML.options.add(newOption);
-						});
-				} else if (
-					document
-						.querySelectorAll(".product-div")
-						[num].querySelector("#type-size").value === "Criança"
-				) {
-					selected.fields.tamanhosPossiveisCriança
-						.split(",")
-						.map((elem) => {
-							var newOption = document.createElement("option");
-							newOption.text = elem.replace(/^\s+|\s+$/g, "");
-							newOption.value = elem.replace(/^\s+|\s+$/g, "");
-							selectHTML.options.add(newOption);
-						});
-				}
-			}
+        document.getElementById("clothing-container").appendChild(newNode);
+      }
 
-			function tipoProdutoChanged(num) {
-				console.log(num);
-				const tipoProduto = document
-					.querySelectorAll(".product-div")
-					[num].querySelector("#description").value;
-				var myJSONList = "{{productsJSON}}".replace(
-					/&(l|g|quo)t;/g,
-					function (a, b) {
-						return {
-							l: "<",
-							g: ">",
-							quo: '"',
-						}[b];
-					}
-				);
+      function typeSizeChanged(num) {
+        const tipoProduto = document
+          .querySelectorAll(".product-div")
+          [num].querySelector("#description").value;
+        var myJSONList = "{{productsJSON}}".replace(/&(l|g|quo)t;/g, function (
+          a,
+          b
+        ) {
+          return {
+            l: "<",
+            g: ">",
+            quo: '"',
+          }[b];
+        });
 
-				myData = JSON.parse(myJSONList);
-				const selected = myData.find(
-					(elem) => elem.fields.tipoProduto === tipoProduto
-				);
+        myData = JSON.parse(myJSONList);
+        const selected = myData.find(
+          (elem) => elem.fields.tipoProduto === tipoProduto
+        );
 
-				var length = document
-					.querySelectorAll(".product-div")
-					[num].querySelector("#quantity").options.length;
+        var length = document
+          .querySelectorAll(".product-div")
+          [num].querySelector("#size").options.length;
 
-				//QUANTIDADE
-				let selectHTML = document
-					.querySelectorAll(".product-div")
-					[num].querySelector("#quantity");
+        //TAMANHOS
+        const selectHTML = document
+          .querySelectorAll(".product-div")
+          [num].querySelector("#size");
 
-				for (i = length - 1; i >= 0; i--) {
-					selectHTML.options[i] = null;
-				}
+        for (i = length - 1; i >= 0; i--) {
+          selectHTML.options[i] = null;
+        }
 
-				for (var i = 1; i <= selected.fields.quantidadeMaxima; i++) {
-					var newOption = document.createElement("option");
-					newOption.text = i.toString();
-					newOption.value = i;
-					selectHTML.options.add(newOption);
-				}
+        if (
+          document
+            .querySelectorAll(".product-div")
+            [num].querySelector("#type-size").value === "Adulto"
+        ) {
+          selected.fields.tamanhosPossiveisAdulto.split(",").map((elem) => {
+            var newOption = document.createElement("option");
+            newOption.text = elem.replace(/^\s+|\s+$/g, "");
+            newOption.value = elem.replace(/^\s+|\s+$/g, "");
+            selectHTML.options.add(newOption);
+          });
+        } else if (
+          document
+            .querySelectorAll(".product-div")
+            [num].querySelector("#type-size").value === "Criança"
+        ) {
+          selected.fields.tamanhosPossiveisCriança.split(",").map((elem) => {
+            var newOption = document.createElement("option");
+            newOption.text = elem.replace(/^\s+|\s+$/g, "");
+            newOption.value = elem.replace(/^\s+|\s+$/g, "");
+            selectHTML.options.add(newOption);
+          });
+        }
+      }
 
-				// TODO: DELETE BUTTOn
-				// TODO: COLOCAR O ADMIN BONITO
+      function tipoProdutoChanged(num) {
+        console.log(num);
+        const tipoProduto = document
+          .querySelectorAll(".product-div")
+          [num].querySelector("#description").value;
+        var myJSONList = "{{productsJSON}}".replace(/&(l|g|quo)t;/g, function (
+          a,
+          b
+        ) {
+          return {
+            l: "<",
+            g: ">",
+            quo: '"',
+          }[b];
+        });
 
-				//RESET TAMANHOS
-				selectHTML = document
-					.querySelectorAll(".product-div")
-					[num].querySelector("#size");
-				length = selectHTML.options.length;
+        myData = JSON.parse(myJSONList);
+        const selected = myData.find(
+          (elem) => elem.fields.tipoProduto === tipoProduto
+        );
 
-				for (i = length - 1; i >= 0; i--) {
-					selectHTML.options[i] = null;
-				}
+        var length = document
+          .querySelectorAll(".product-div")
+          [num].querySelector("#quantity").options.length;
 
-				if (selected.fields.tamanhosPossiveis) {
-					document
-						.querySelectorAll(".product-div")
-						[num].querySelector("#type-size-div").style.display =
-						"none";
-					selected.fields.tamanhosPossiveis.split(",").map((elem) => {
-						var newOption = document.createElement("option");
-						newOption.text = elem.replace(/^\s+|\s+$/g, "");
-						newOption.value = elem.replace(/^\s+|\s+$/g, "");
-						selectHTML.options.add(newOption);
-					});
-				} else {
-					document
-						.querySelectorAll(".product-div")
-						[num].querySelector("#type-size-div").style.display =
-						"block";
-					// OPTION IS THE DEFAULT
-					if (
-						document
-							.querySelectorAll(".product-div")
-							[num].querySelector("#type-size").value === "Adulto"
-					) {
-						selected.fields.tamanhosPossiveisAdulto
-							.split(",")
-							.map((elem) => {
-								var newOption = document.createElement(
-									"option"
-								);
-								newOption.text = elem.replace(/^\s+|\s+$/g, "");
-								newOption.value = elem.replace(
-									/^\s+|\s+$/g,
-									""
-								);
-								selectHTML.options.add(newOption);
-							});
-					} else if (
-						document
-							.querySelectorAll(".product-div")
-							[num].querySelector("#type-size").value ===
-						"Criança"
-					) {
-						selected.fields.tamanhosPossiveisCriança
-							.split(",")
-							.map((elem) => {
-								var newOption = document.createElement(
-									"option"
-								);
-								newOption.text = elem.replace(/^\s+|\s+$/g, "");
-								newOption.value = elem.replace(
-									/^\s+|\s+$/g,
-									""
-								);
-								selectHTML.options.add(newOption);
-							});
-					}
-				}
-			}
+        //QUANTIDADE
+        let selectHTML = document
+          .querySelectorAll(".product-div")
+          [num].querySelector("#quantity");
 
-			function submitFormHidden() {
-				finalForm = document.getElementsByClassName("hidden-form")[0];
-				inputs = finalForm.getElementsByTagName("input");
+        for (i = length - 1; i >= 0; i--) {
+          selectHTML.options[i] = null;
+        }
 
-				for (let i = 0; i < inputs.length; i++) {
-					if (inputs[i].name === "requestType") {
-						if (op0.checked) {
-							inputs[i].value = "intern";
-						} else if (op1.checked) {
-							inputs[i].value = "individual";
-						}
-					}
-					if (inputs[i].name === "numPeople") {
-						let numPeople = document.getElementById(
-							"numPeopleField"
-						);
-						if (op0.checked) {
-							inputs[i].value = numPeople.value;
-						} else if (op1.checked) {
-							inputs[i].value = numPeople.value;
-						}
-					}
-					if (op1.checked && inputs[i].name === "peopleInfo") {
-						let finalValue = "";
-						let people = document.getElementsByClassName(
-							"person-div"
-						);
-						for (let k = 0; k < people.length; k++) {
-							const name1 = people[k].querySelector("#name1")
-								.value;
-							const name2 = people[k].querySelector("#name2")
-								.value;
-							const cc = people[k].querySelector("#cc").value;
-							const phone = people[k].querySelector("#phone")
-								.value;
-							if (k !== 0) {
-								finalValue += "/";
-							}
-							finalValue +=
-								name1 + "," + name2 + "," + cc + "," + phone;
-						}
-						// ADD REQUEST INFO
-						inputs[i].value = finalValue;
-					} else if (inputs[i].name === "requestInfo") {
-						let finalValue = "";
-						let products = document.getElementsByClassName(
-							"product-div"
-						);
-						for (let k = 0; k < products.length; k++) {
-							const description = products[k].querySelector(
-								"#description"
-							).value;
-							const quantity = products[k].querySelector(
-								"#quantity"
-							).value;
-							const typeSize =
-								products[k].querySelector("#type-size")
-									.parentElement.style.display === "none"
-									? ""
-									: products[k].querySelector("#type-size")
-											.value;
-							const productSize = products[k].querySelector(
-								"#size"
-							).value;
-							if (k !== 0) {
-								finalValue += "/";
-							}
-							finalValue +=
-								description +
-								"," +
-								quantity +
-								"," +
-								typeSize +
-								"," +
-								productSize;
-						}
-						// ADD REQUEST INFO
-						inputs[i].value = finalValue;
-					}
-				}
-				finalForm.submit();
-			}
+        for (var i = 1; i <= selected.fields.quantidadeMaxima; i++) {
+          var newOption = document.createElement("option");
+          newOption.text = i.toString();
+          newOption.value = i;
+          selectHTML.options.add(newOption);
+        }
 
-			function addPerson() {
-				const newNode = document
-					.getElementById("person-div")
-					.cloneNode(true);
+        // TODO: DELETE BUTTOn
+        // TODO: COLOCAR O ADMIN BONITO
 
-				const inputs = newNode.getElementsByTagName("input");
-				for (var i = 0; i < inputs.length; i++) {
-					inputs[i].value = null;
-				}
-				document.getElementById("id-container").appendChild(newNode);
-			}
-			function checkAgregado(val) {
-				var element = document.getElementById("numPeople");
-				console.log(element);
-				if (val == "0") {
-					//ESCONDER NUM DE PESSOAS
-					element.style.display = "none";
-				} else {
-					//MOSTAR NUM DE PESSOAS
-					element.style.display = "block";
-				}
-			}
-		</script>
-	</body>
+        //RESET TAMANHOS
+        selectHTML = document
+          .querySelectorAll(".product-div")
+          [num].querySelector("#size");
+        length = selectHTML.options.length;
+
+        for (i = length - 1; i >= 0; i--) {
+          selectHTML.options[i] = null;
+        }
+
+        if (selected.fields.tamanhosPossiveis) {
+          document
+            .querySelectorAll(".product-div")
+            [num].querySelector("#type-size-div").style.display = "none";
+          selected.fields.tamanhosPossiveis.split(",").map((elem) => {
+            var newOption = document.createElement("option");
+            newOption.text = elem.replace(/^\s+|\s+$/g, "");
+            newOption.value = elem.replace(/^\s+|\s+$/g, "");
+            selectHTML.options.add(newOption);
+          });
+        } else {
+          document
+            .querySelectorAll(".product-div")
+            [num].querySelector("#type-size-div").style.display = "block";
+          // OPTION IS THE DEFAULT
+          if (
+            document
+              .querySelectorAll(".product-div")
+              [num].querySelector("#type-size").value === "Adulto"
+          ) {
+            selected.fields.tamanhosPossiveisAdulto.split(",").map((elem) => {
+              var newOption = document.createElement("option");
+              newOption.text = elem.replace(/^\s+|\s+$/g, "");
+              newOption.value = elem.replace(/^\s+|\s+$/g, "");
+              selectHTML.options.add(newOption);
+            });
+          } else if (
+            document
+              .querySelectorAll(".product-div")
+              [num].querySelector("#type-size").value === "Criança"
+          ) {
+            selected.fields.tamanhosPossiveisCriança.split(",").map((elem) => {
+              var newOption = document.createElement("option");
+              newOption.text = elem.replace(/^\s+|\s+$/g, "");
+              newOption.value = elem.replace(/^\s+|\s+$/g, "");
+              selectHTML.options.add(newOption);
+            });
+          }
+        }
+      }
+
+      function submitFormHidden() {
+        finalForm = document.getElementsByClassName("hidden-form")[0];
+        inputs = finalForm.getElementsByTagName("input");
+
+        for (let i = 0; i < inputs.length; i++) {
+          if (inputs[i].name === "requestType") {
+            if (op0.checked) {
+              inputs[i].value = "intern";
+            } else if (op1.checked) {
+              inputs[i].value = "individual";
+            }
+          }
+          if (inputs[i].name === "numPeople") {
+            let numPeople = document.getElementById("numPeopleField");
+            if (op0.checked) {
+              inputs[i].value = numPeople.value;
+            } else if (op1.checked) {
+              inputs[i].value = numPeople.value;
+            }
+          }
+          if (op1.checked && inputs[i].name === "peopleInfo") {
+            let finalValue = "";
+            let people = document.getElementsByClassName("person-div");
+            for (let k = 0; k < people.length; k++) {
+              const name1 = people[k].querySelector("#name1").value;
+              const name2 = people[k].querySelector("#name2").value;
+              const cc = people[k].querySelector("#cc").value;
+              const phone = people[k].querySelector("#phone").value;
+              if (k !== 0) {
+                finalValue += "/";
+              }
+              finalValue += name1 + "," + name2 + "," + cc + "," + phone;
+            }
+            // ADD REQUEST INFO
+            inputs[i].value = finalValue;
+          } else if (inputs[i].name === "requestInfo") {
+            let finalValue = "";
+            let products = document.getElementsByClassName("product-div");
+            for (let k = 0; k < products.length; k++) {
+              const description = products[k].querySelector("#description")
+                .value;
+              const quantity = products[k].querySelector("#quantity").value;
+              const typeSize =
+                products[k].querySelector("#type-size").parentElement.style
+                  .display === "none"
+                  ? ""
+                  : products[k].querySelector("#type-size").value;
+              const productSize = products[k].querySelector("#size").value;
+              if (k !== 0) {
+                finalValue += "/";
+              }
+              finalValue +=
+                description +
+                "," +
+                quantity +
+                "," +
+                typeSize +
+                "," +
+                productSize;
+            }
+            // ADD REQUEST INFO
+            inputs[i].value = finalValue;
+          } else if (inputs[i].name === "ageAndGenderInfo") {
+            let finalValue = "";
+            let info = document.getElementsByClassName("info-div");
+            for (let k = 0; k < info.length; k++) {
+              const age = info[k].querySelector("#age").value;
+              const gender = info[k].querySelector("#sexo").value;
+              if (k !== 0) {
+                finalValue += "/";
+              }
+              finalValue += gender + "," + age;
+            }
+            // ADD GENDER AND AGE INFO
+            inputs[i].value = finalValue;
+          }
+        }
+        finalForm.submit();
+      }
+
+      function addPerson() {
+        const newNode = document.getElementById("person-div").cloneNode(true);
+
+        const inputs = newNode.getElementsByTagName("input");
+        for (var i = 0; i < inputs.length; i++) {
+          inputs[i].value = null;
+        }
+        document.getElementById("id-container").appendChild(newNode);
+      }
+      function checkAgregado(val) {
+        var element = document.getElementById("numPeople");
+        console.log(element);
+        if (val == "0") {
+          //ESCONDER NUM DE PESSOAS
+          element.style.display = "none";
+        } else {
+          //MOSTAR NUM DE PESSOAS
+          element.style.display = "block";
+        }
+      }
+    </script>
+  </body>
 </html>

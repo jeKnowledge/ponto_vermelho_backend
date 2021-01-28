@@ -148,6 +148,61 @@ button:focus {
 	outline: none;
 }
 
+.info-container {
+	height: 55%;
+	padding: 5% 15%;
+	margin: 5% 0%;
+	overflow: hidden;
+	overflow-y: scroll;
+}
+
+.info-container label {
+	font-weight: 300;
+	color: #0181d3;
+}
+
+.info-container h2 {
+	font-size: 2em;
+	color: #0181d3;
+}
+
+.info-container h3 {
+	font-weight: 450;
+	font-size: 1.2em;
+	color: #0181d3;
+	padding-top:4%;
+}
+
+.info-field {
+	display: block;
+	margin-top: 1%;
+	position: relative;
+}
+.info-field select {
+	width: 100%;
+	padding: 7.5px 0;
+	border-style: none;
+	border-bottom: 1px solid #0181d3;
+	box-sizing: border-box;
+	color: #014e82;
+	background: transparent;
+}
+.info-field select[name="description"] {
+	width: 160%;
+}
+
+.info-field input {
+	width: 100%;
+	padding: 7.5px 0;
+	border-style: none;
+	border-bottom: 1px solid #0181d3;
+	box-sizing: border-box;
+	color: #014e82;
+}
+
+.clothing-field select[name="quantity"] {
+}
+
 .kind-check {
 	margin-top: 10%;
 }
@@ -190,6 +245,7 @@ button:focus {
 	border-bottom: 1px solid #0181d3;
 	box-sizing: border-box;
 	color: #014e82;
+	background: transparent;
 }
 .clothing-field select[name="description"] {
 	width: 160%;
@@ -216,6 +272,7 @@ button:focus {
 	color:  #014e82;
 	border-style: none;
 	border-bottom: 1px solid #0181d3;
+	background: transparent;
 }
 .container input {
 	position: absolute;
