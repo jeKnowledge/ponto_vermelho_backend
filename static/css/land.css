@@ -48,8 +48,15 @@ nav #portal:hover {
 }
 
 @media only screen and (max-width: 880px) {
-  nav img {
-    width: 30%;
+  nav {
+    margin: 3%;
+    height: 2.5vh;
+  }
+  nav .nav-logos a:nth-child(2){
+    margin: 0 4%;
+  }
+  nav #portal {
+    right: 3%;
   }
 }
 
