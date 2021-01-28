@@ -3,18 +3,22 @@
   padding: 0;
   font-family: 'Poppins', sans-serif;
 }
+body{
+  overflow-x: hidden;
+}
 
 nav {
   display: flex;
+  position: relative;
   height: 5vh;
   margin: 2%;
-  position: relative;
 }
-nav .nav-logos {
-  position: relative;
-  display: flex;
-  justify-content: flex-start;
+nav .nav-logos{
   width: 100%;
+}
+nav .nav-logos{
+  width: 100%;
+  height: 100%;
 }
 nav .nav-logos a{
   width: fit-content;
@@ -24,10 +28,9 @@ nav .nav-logos img {
   height: 100%;
 }
 nav .nav-logos a:nth-child(2){
-  margin: 0 2.5%;
-  transform: scale(1.5 , 1.5);
+  margin: 0 1%;
+  transform: scale(1.6 , 1.6);
 }
-
 nav #portal {
   text-decoration: none;
   background-color: #0181D3;
@@ -48,31 +51,21 @@ nav #portal:hover {
 }
 
 @media only screen and (max-width: 880px) {
-  nav {
+  nav{
+    height: 3vh;
     margin: 3%;
-    height: 2.5vh;
-  }
-  nav .nav-logos a:nth-child(2){
-    margin: 0 4%;
-  }
-  nav #portal {
-    right: 3%;
-  }
-}
-
-@media only screen and (max-width: 550px) {
-  nav #portal {
-    font-size: 12px;
-    padding: 1% 4%;
   }
 }
 
 /*----------------------------INTRO------------------------------*/
 #intro h1 {
   text-align: center;
-  padding: 20% 0;
+  padding: 20% 10%;
   font-size: 4em;
   color: #0181D3;
+}
+#quote{
+  color: #d72d10;
 }
 
 @media only screen and (max-width: 550px) {

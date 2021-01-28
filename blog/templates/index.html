@@ -46,18 +46,18 @@
 
 		<main>
 			<section id="intro">
-				<h1 id="quote">GOOD FOR THE POCKET</h1>
+				<h1>GOOD FOR THE <span id="quote">POCKET</span></h1>
 			</section>
 
 			<script>
 				var text = [
-					"GOOD FOR THE POCKET",
-					"GOOD FOR THE PLANET",
-					"GOOD FOR THE PEOPLE"
+					"POCKET",
+					"PLANET",
+					"PEOPLE"
 				];
 				var counter = 1;
 				var elem = document.getElementById("quote");
-				var inst = setInterval(change, 1000);
+				var inst = setInterval(change, 1500);
 
 				function change() {
 					elem.innerHTML = text[counter];
