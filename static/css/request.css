@@ -458,23 +458,30 @@ button:focus {
 	.tab {
 		width: 108%;
 	}
-	.clothing-container {
-		height: 60%;
+	.clothing-container , .info-container{
+		height: 65%;
 	}
-	.clothing-container label {
+	.clothing-container label , .info-container label {
 		font-size: 14px;
 	}
-	.clothing-field{
+	.clothing-field, .info-div{
 		width: 94%;
+	}
+	.info-container h2{
+		font-size: 1.5em;
+		padding-bottom: 8%;
 	}
 	.clothing-field select[name="description"] {
 		width: 100%;
 	}
-  .clothing-line{
+  	.clothing-line{
 		display: block;
 
-	  }
-	  .clothing-line:nth-child(2){
+	}
+	.info-div{
+		padding: 4% 0 2% 0;
+	}
+	.clothing-line:nth-child(2){
 		padding-bottom: 12%;
 	}
 	.clothing-line:nth-child(1){
